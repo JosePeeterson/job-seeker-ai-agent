@@ -1,0 +1,34 @@
+# Virtual environment
+tina-agent/
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Data / secrets
+*.env
+.env
+*.pages
+
+# Chroma DB (local vector store)
+data/chroma_db/
+
+# Generated outputs (optional – remove lines to track these)
+data/scraped_jobs.json
+data/ranked_jobs.json
+data/digest.html
+data/cover_letters/
+data/resumes/
+data/applications/
+
+# macOS
+.DS_Store

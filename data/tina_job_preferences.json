@@ -1,0 +1,18 @@
+{
+  "academia_preference_order": [
+    "English literature teaching",
+    "Liberal arts / humanities teaching",
+    "Education / EdTech",
+    "Research assistant / teaching assistant",
+    "Speculative fiction / science fiction studies"
+  ],
+  "industry_preference_order": [
+    "Content writing / editorial",
+    "Digital content / digital media",
+    "Publishing / educational publishing",
+    "UX / qualitative research support",
+    "Corporate communication",
+    "Grant / proposal writing",
+    "Knowledge management / documentation"
+  ]
+}

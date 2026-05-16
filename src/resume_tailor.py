@@ -1,0 +1,123 @@
+"""
+Resume tailoring module.
+
+Takes a ranked job dict + Tina's full CV text and produces a tailored
+resume (plain text) that highlights the most relevant experience and
+maps her background to the specific job requirements.
+
+Usage:
+    from resume_tailor import tailor_resume
+
+    tailored = tailor_resume(job, cv_text, model="llama3.1:8b")
+    # returns a plain-text tailored resume string
+    # also saves to data/resumes/<slug>.txt
+"""
+
+from pathlib import Path
+import sys
+import re
+
+import ollama
+
+sys.path.insert(0, str(Path(__file__).parent))
+
+DATA_DIR = Path(__file__).parent.parent / "data"
+RESUMES_DIR = DATA_DIR / "resumes"
+CV_PATH = DATA_DIR / "tina_cv.txt"
+
+DEFAULT_MODEL = "llama3.1:8b"
+
+
+def _slug(title: str, company: str) -> str:
+    raw = f"{title}_{company}".lower()
+    return re.sub(r"[^a-z0-9]+", "_", raw)[:80].strip("_")
+
+
+def tailor_resume(job: dict, cv_text: str = None, model: str = DEFAULT_MODEL) -> str:
+    """
+    Generate a tailored resume for the given job.
+
+    Returns the tailored resume as a plain-text string and saves it
+    to data/resumes/<slug>.txt.
+    """
+    if cv_text is None:
+        cv_text = CV_PATH.read_text()
+
+    title = job.get("title", "Unknown Role")
+    company = job.get("company", "Unknown Company")
+    description = job.get("description", "")
+    requirements = job.get("requirements", {})
+    req_text = ""
+    if requirements:
+        import json
+        req_text = json.dumps(requirements, indent=2)
+    else:
+        req_text = description[:2000]
+
+    prompt = f"""You are a professional CV writer helping an academic candidate apply for a job.
+
+Candidate background:
+- PhD (submitted) in English Literature, specialising in Digital Humanities and Posthumanism
+- MA English Literature (First Class with Distinction)
+- Scopus-indexed publications on cyberpunk literature and technoculture
+- International conference presentations
+- Research in Digital Humanities, Posthumanism, Cyberpunk Studies, Identity Studies
+- Academic skills: Research Methodology, Academic Writing, Critical Theory, Literary Analysis
+
+Target role: {title} at {company}
+
+Job requirements:
+{req_text}
+
+Original CV:
+{cv_text}
+
+Task: Rewrite the CV to be tailored for this specific role. 
+- Keep all factual information accurate — do NOT invent experience or qualifications
+- Reorder and reframe sections to emphasise what is most relevant to this role
+- Adjust the Professional Summary to speak directly to this role's needs
+- Use the job's keywords naturally where they genuinely apply
+- Keep the same CV structure: Summary, Education, Research Interests, Publications, Conferences, Skills
+- Output plain text only, no markdown, no JSON
+
+Write the complete tailored CV now:"""
+
+    response = ollama.chat(
+        model=model,
+        messages=[{"role": "user", "content": prompt}],
+        options={"temperature": 0.3},
+    )
+    tailored = response["message"]["content"].strip()
+
+    # Save to file
+    RESUMES_DIR.mkdir(parents=True, exist_ok=True)
+    slug = _slug(title, company)
+    out_path = RESUMES_DIR / f"{slug}.txt"
+    out_path.write_text(tailored)
+    print(f"[Resume] Saved tailored resume → {out_path.relative_to(DATA_DIR.parent)}")
+
+    return tailored
+
+
+if __name__ == "__main__":
+    import json
+
+    ranked_path = DATA_DIR / "ranked_jobs.json"
+    if not ranked_path.exists():
+        print("No ranked_jobs.json found. Run job_ranker.py first.")
+        sys.exit(1)
+
+    with open(ranked_path) as f:
+        ranked = json.load(f)
+
+    cv_text = CV_PATH.read_text()
+    model = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_MODEL
+
+    apply_jobs = [j for j in ranked if j["decision"] == "apply"]
+    print(f"Tailoring resumes for {len(apply_jobs)} apply-decision jobs...")
+
+    for job in apply_jobs:
+        print(f"\n[Resume] Tailoring for: {job['title']} @ {job['company']}")
+        tailor_resume(job, cv_text, model=model)
+
+    print("\nDone.")
