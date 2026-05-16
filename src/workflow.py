@@ -21,7 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from job_scraper import scrape_jobstreet, load_keywords
+from job_scraper import scrape_all, load_keywords
 from job_ranker import rank_all_jobs, print_summary, DEFAULT_MODEL
 from resume_tailor import tailor_resume
 from cover_letter import generate_cover_letter
@@ -33,7 +33,7 @@ RANKED_PATH = DATA_DIR / "ranked_jobs.json"
 CV_PATH = DATA_DIR / "tina_cv.txt"
 
 
-def run(skip_scrape: bool = False, apply_only: bool = False, model: str = DEFAULT_MODEL, notify: bool = False):
+def run(skip_scrape: bool = False, apply_only: bool = False, model: str = DEFAULT_MODEL, notify: bool = False, sources: list = None):
     # ── 1. Scrape ──────────────────────────────────────────────────────────────
     if not apply_only:
         if skip_scrape and SCRAPED_PATH.exists():
@@ -42,10 +42,12 @@ def run(skip_scrape: bool = False, apply_only: bool = False, model: str = DEFAUL
                 jobs = json.load(f)
             print(f"[Workflow] Loaded {len(jobs)} jobs from disk.")
         else:
-            print("[Workflow] ── Step 1: Scraping JobStreet ──")
+            active_sources = sources or ["jobstreet", "linkedin"]
+            src_label = " + ".join(active_sources)
+            print(f"[Workflow] ── Step 1: Scraping {src_label} ──")
             keywords = load_keywords()
             print(f"[Workflow] Keywords: {keywords}")
-            jobs = scrape_jobstreet(keywords, fetch_full_descriptions=True)
+            jobs = scrape_all(keywords, sources=active_sources, fetch_full_descriptions=True)
             print(f"[Workflow] Scraped {len(jobs)} jobs.")
 
         # ── 2. Rank ────────────────────────────────────────────────────────────
@@ -105,11 +107,18 @@ def main():
     parser = argparse.ArgumentParser(description="AI Job Seeker Agent — full workflow")
     parser.add_argument("--skip-scrape", action="store_true", help="Skip scraping, use existing scraped_jobs.json")
     parser.add_argument("--apply-only", action="store_true", help="Only generate docs for existing apply decisions")
-    parser.add_argument("--model", default=DEFAULT_MODEL, help=f"Ollama model to use (default: {DEFAULT_MODEL})")
+    parser.add_argument("--model", default=DEFAULT_MODEL, help=f"LLM model to use (default: {DEFAULT_MODEL})")
     parser.add_argument("--notify", action="store_true", help="Send email digest after run (requires SMTP env vars)")
+    parser.add_argument(
+        "--source",
+        choices=["jobstreet", "linkedin", "all"],
+        default="all",
+        help="Which job sites to scrape (default: all)",
+    )
     args = parser.parse_args()
 
-    run(skip_scrape=args.skip_scrape, apply_only=args.apply_only, model=args.model, notify=args.notify)
+    sources = ["jobstreet", "linkedin"] if args.source == "all" else [args.source]
+    run(skip_scrape=args.skip_scrape, apply_only=args.apply_only, model=args.model, notify=args.notify, sources=sources)
 
 
 if __name__ == "__main__":

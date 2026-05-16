@@ -384,10 +384,18 @@ elif page == "⚙️ Run Pipeline":
 
     with col_opts:
         st.subheader("Options")
+        scrape_sources = st.multiselect(
+            "Job sources",
+            ["JobStreet", "LinkedIn"],
+            default=["JobStreet", "LinkedIn"],
+            help="Which sites to scrape for job listings",
+        )
+        _source_map = {"JobStreet": "jobstreet", "LinkedIn": "linkedin"}
+        selected_sources = [_source_map[s] for s in scrape_sources] or ["jobstreet"]
         skip_scrape = st.checkbox(
             "Skip scrape (use existing scraped_jobs.json)",
             value=SCRAPED_PATH.exists(),
-            help="Uncheck to re-scrape JobStreet (slower)",
+            help="Uncheck to re-scrape (slower)",
         )
         skip_rank = st.checkbox(
             "Skip ranking (use existing ranked_jobs.json)",
@@ -414,14 +422,15 @@ elif page == "⚙️ Run Pipeline":
     c1, c2, c3, c4 = st.columns(4)
 
     if c1.button("🕷️ Scrape only", width="stretch"):
-        with st.status("Scraping JobStreet…", expanded=True) as status:
+        src_label = " + ".join(scrape_sources) or "JobStreet"
+        with st.status(f"Scraping {src_label}…", expanded=True) as status:
             buf = io.StringIO()
             try:
                 sys.stdout = buf
-                from job_scraper import scrape_jobstreet, load_keywords
+                from job_scraper import scrape_all, load_keywords
                 keywords = load_keywords()
-                st.write(f"Keywords: {keywords}")
-                jobs = scrape_jobstreet(keywords, fetch_full_descriptions=True)
+                st.write(f"Sources: {src_label}  |  Keywords: {len(keywords)}")
+                jobs = scrape_all(keywords, sources=selected_sources, fetch_full_descriptions=True)
                 with open(SCRAPED_PATH, "w") as f:
                     json.dump(jobs, f, indent=2)
                 sys.stdout = sys.__stdout__
@@ -485,10 +494,11 @@ elif page == "⚙️ Run Pipeline":
             try:
                 # Step 1: Scrape
                 if not skip_scrape:
-                    status.write("**Step 1: Scraping JobStreet…**")
-                    from job_scraper import scrape_jobstreet, load_keywords
+                    src_label = " + ".join(scrape_sources) or "JobStreet"
+                    status.write(f"**Step 1: Scraping {src_label}…**")
+                    from job_scraper import scrape_all, load_keywords
                     keywords = load_keywords()
-                    jobs = scrape_jobstreet(keywords, fetch_full_descriptions=True)
+                    jobs = scrape_all(keywords, sources=selected_sources, fetch_full_descriptions=True)
                     with open(SCRAPED_PATH, "w") as f:
                         json.dump(jobs, f, indent=2)
                     status.write(f"✅ Scraped {len(jobs)} jobs")
