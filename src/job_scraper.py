@@ -51,6 +51,8 @@ def load_keywords():
 
 BASE_URL = "https://sg.jobstreet.com"
 LINKEDIN_BASE = "https://www.linkedin.com"
+# LinkedIn geoId for Singapore — ensures location filter is exact, not text-matched
+LINKEDIN_SG_GEO_ID = "102454443"
 
 
 def _fetch_full_description(page, job_url: str) -> str:
@@ -159,6 +161,10 @@ def scrape_linkedin(
     """
     Scrape LinkedIn Jobs public search pages (no login required).
 
+    Always scopes results to Singapore via geoId=102454443, which is
+    LinkedIn's canonical geo-identifier for Singapore. The `location`
+    parameter is kept for display purposes only.
+
     Returns a list of job dicts matching the same schema as scrape_jobstreet():
       title, company, url, description, matched_keyword, source
     """
@@ -193,10 +199,10 @@ def scrape_linkedin(
 
         for keyword in tqdm(keywords, desc="LinkedIn keywords", unit="kw"):
             encoded_kw = keyword.replace(" ", "%20")
-            encoded_loc = location.replace(" ", "%20")
             search_url = (
                 f"{LINKEDIN_BASE}/jobs/search/"
-                f"?keywords={encoded_kw}&location={encoded_loc}"
+                f"?keywords={encoded_kw}"
+                f"&location=Singapore&geoId={LINKEDIN_SG_GEO_ID}"
                 f"&f_TPR={time_filter}&sortBy=DD"
             )
             print(f"[LinkedIn] Searching: {keyword}")
