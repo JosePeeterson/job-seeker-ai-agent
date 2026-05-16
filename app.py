@@ -31,7 +31,7 @@ DB_PATH = DATA_DIR / "jobs.db"
 RESUMES_DIR = DATA_DIR / "resumes"
 COVER_LETTERS_DIR = DATA_DIR / "cover_letters"
 
-MODELS = ["llama3.1:8b", "mistral:7b", "qwen3:8b"]
+MODELS = ["gpt-4o-mini", "gpt-4o", "llama3.1:8b", "mistral:7b", "qwen3:8b"]
 
 # ── Page config ─────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -157,7 +157,7 @@ if "job_overrides" not in st.session_state:
 # ── Sidebar ──────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.title("🎓Tina's AI Job Seeker agent")
-    st.caption("Powered by Ollama + ChromaDB")
+    st.caption("Powered by OpenAI / Ollama + ChromaDB")
     st.divider()
 
     page = st.radio(
@@ -167,7 +167,7 @@ with st.sidebar:
     )
     st.divider()
 
-    st.session_state.model = st.selectbox("Ollama model", MODELS, index=MODELS.index(st.session_state.model))
+    st.session_state.model = st.selectbox("LLM model", MODELS, index=MODELS.index(st.session_state.model))
 
     ranked = _load_ranked()
     if ranked:

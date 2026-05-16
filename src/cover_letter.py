@@ -16,9 +16,8 @@ from pathlib import Path
 import sys
 import re
 
-import ollama
-
 sys.path.insert(0, str(Path(__file__).parent))
+from llm import chat as _llm_chat
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 COVER_LETTERS_DIR = DATA_DIR / "cover_letters"
@@ -93,12 +92,7 @@ Write a professional cover letter for this application. Guidelines:
 
 Write the cover letter now:"""
 
-    response = ollama.chat(
-        model=model,
-        messages=[{"role": "user", "content": prompt}],
-        options={"temperature": 0.4},
-    )
-    letter = response["message"]["content"].strip()
+    letter = _llm_chat(prompt, model, temperature=0.4)
 
     # Save to file
     COVER_LETTERS_DIR.mkdir(parents=True, exist_ok=True)

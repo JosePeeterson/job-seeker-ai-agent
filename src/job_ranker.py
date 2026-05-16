@@ -21,10 +21,9 @@ import json
 import sys
 from pathlib import Path
 
-import ollama
-
 sys.path.insert(0, str(Path(__file__).parent))
 from vector_store import query_collection, ingest_document, collection_count
+from llm import chat as _llm_chat
 
 DEFAULT_MODEL = "llama3.1:8b"
 
@@ -34,13 +33,8 @@ DEFAULT_MODEL = "llama3.1:8b"
 # ---------------------------------------------------------------------------
 
 def _chat(prompt: str, model: str = DEFAULT_MODEL) -> str:
-    """Call the local Ollama model and return the response text."""
-    response = ollama.chat(
-        model=model,
-        messages=[{"role": "user", "content": prompt}],
-        options={"temperature": 0},
-    )
-    return response["message"]["content"].strip()
+    """Call the configured LLM (OpenAI on cloud, Ollama locally) and return the response text."""
+    return _llm_chat(prompt, model, temperature=0.0)
 
 
 def _parse_json(raw: str) -> dict:

@@ -17,9 +17,8 @@ from pathlib import Path
 import sys
 import re
 
-import ollama
-
 sys.path.insert(0, str(Path(__file__).parent))
+from llm import chat as _llm_chat
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 RESUMES_DIR = DATA_DIR / "resumes"
@@ -82,12 +81,7 @@ Task: Rewrite the CV to be tailored for this specific role.
 
 Write the complete tailored CV now:"""
 
-    response = ollama.chat(
-        model=model,
-        messages=[{"role": "user", "content": prompt}],
-        options={"temperature": 0.3},
-    )
-    tailored = response["message"]["content"].strip()
+    tailored = _llm_chat(prompt, model, temperature=0.3)
 
     # Save to file
     RESUMES_DIR.mkdir(parents=True, exist_ok=True)
