@@ -263,7 +263,7 @@ elif page == "🔍 Review Jobs":
         f"📋 All ({len(ranked)})",
     ])
 
-    def _render_job_list(jobs: list):
+    def _render_job_list(jobs: list, ns: str = ""):
         if not jobs:
             st.info("No jobs in this category.")
             return
@@ -272,6 +272,8 @@ elif page == "🔍 Review Jobs":
 
         for job in jobs:
             url = job.get("url", "")
+            # Unique key prefix per tab so the same job URL doesn't clash across tabs
+            k = f"{ns}_{url}"
             title = job.get("title", "Unknown")
             company = job.get("company", "Unknown")
             score = job.get("score", 0)
@@ -323,14 +325,14 @@ elif page == "🔍 Review Jobs":
                             data=Path(resume_path).read_text(),
                             file_name=Path(resume_path).name,
                             mime="text/plain",
-                            key=f"dl_resume_{url}",
+                            key=f"dl_resume_{k}",
                         )
                         dl2.download_button(
                             "📧 Download Cover Letter",
                             data=Path(cl_path).read_text(),
                             file_name=Path(cl_path).name,
                             mime="text/plain",
-                            key=f"dl_cl_{url}",
+                            key=f"dl_cl_{k}",
                         )
                     else:
                         missing = []
@@ -339,7 +341,7 @@ elif page == "🔍 Review Jobs":
                         if not cl_path:
                             missing.append("cover letter")
                         st.warning(f"No {' or '.join(missing)} yet.")
-                        if st.button("⚡ Generate Docs", key=f"gen_{url}"):
+                        if st.button("⚡ Generate Docs", key=f"gen_{k}"):
                             with st.spinner("Generating tailored resume and cover letter…"):
                                 try:
                                     tailored = tailor_resume(job, cv_text=cv_text, model=st.session_state.model)
@@ -356,22 +358,22 @@ elif page == "🔍 Review Jobs":
                         st.error("⏭️ Skipped")
                     else:
                         b1, b2 = st.columns(2)
-                        if b1.button("✅ Applied", key=f"apply_{url}", type="primary"):
+                        if b1.button("✅ Applied", key=f"apply_{k}", type="primary"):
                             r_path, c_path = _docs_exist(job)
                             _db_upsert_and_apply(job, r_path, c_path)
                             st.session_state.job_overrides[url] = "applied"
                             st.rerun()
-                        if b2.button("⏭️ Skip", key=f"skip_{url}"):
+                        if b2.button("⏭️ Skip", key=f"skip_{k}"):
                             _db_mark_skipped(job)
                             st.session_state.job_overrides[url] = "skipped"
                             st.rerun()
 
     with tab_apply:
-        _render_job_list([j for j in ranked if j["decision"] == "apply"])
+        _render_job_list([j for j in ranked if j["decision"] == "apply"], ns="apply")
     with tab_maybe:
-        _render_job_list([j for j in ranked if j["decision"] == "maybe"])
+        _render_job_list([j for j in ranked if j["decision"] == "maybe"], ns="maybe")
     with tab_all:
-        _render_job_list(ranked)
+        _render_job_list(ranked, ns="all")
 
 
 # ═══════════════════════════════════════════════════════════════════════════
