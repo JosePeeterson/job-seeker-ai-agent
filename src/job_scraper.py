@@ -1,4 +1,6 @@
 import json
+import subprocess
+import sys
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 from tqdm import tqdm
@@ -8,6 +10,35 @@ import time
 DATA_DIR = Path(__file__).parent.parent / "data"
 
 import re
+
+_browsers_installed = False
+
+
+def _ensure_playwright_browsers() -> None:
+    """
+    Download Playwright's Chromium binary if it isn't already cached.
+    On Streamlit Cloud the Python package is installed but the browser
+    executable is not — this runs `playwright install chromium` once.
+    """
+    global _browsers_installed
+    if _browsers_installed:
+        return
+    try:
+        result = subprocess.run(
+            [sys.executable, "-m", "playwright", "install", "chromium"],
+            capture_output=True,
+            text=True,
+            timeout=180,
+        )
+        if result.returncode != 0:
+            print(f"[WARN] playwright install output: {result.stdout} {result.stderr}")
+        else:
+            print("[INFO] Playwright Chromium ready.")
+    except Exception as e:
+        print(f"[WARN] Could not run playwright install: {e}")
+    _browsers_installed = True
+
+
 def clean_keyword(kw):
     # Only allow keywords with letters, numbers, spaces, and hyphens, and max 3 words
     kw = kw.strip()
@@ -68,6 +99,7 @@ def _fetch_full_description(page, job_url: str) -> str:
 
 
 def scrape_jobstreet(keywords, max_pages=1, fetch_full_descriptions=True):
+    _ensure_playwright_browsers()
     jobs = []
     seen_urls = set()
     print(f"[INFO] Starting scraping for {len(keywords)} keywords...")
@@ -173,6 +205,7 @@ def scrape_linkedin(
     # LinkedIn time filter: r86400=24h, r604800=1w, r2592000=30d
     time_filter = f"r{days_posted * 86400}"
 
+    _ensure_playwright_browsers()
     print(f"[LinkedIn] Starting scrape for {len(keywords)} keywords in {location}…")
 
     with sync_playwright() as p:
