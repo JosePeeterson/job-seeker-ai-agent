@@ -213,7 +213,17 @@ def rank_job(job: dict, model: str = DEFAULT_MODEL) -> dict:
         }
 
     # Step 1 — Extract requirements from the job description
-    requirements = extract_requirements(job_desc, model)
+    try:
+        requirements = extract_requirements(job_desc, model)
+    except Exception as exc:
+        print(f"[ERROR] extract_requirements failed for '{title}': {exc}")
+        return {
+            **job,
+            "score": 0,
+            "decision": "reject",
+            "requirements": {},
+            "ranking_details": {"explanation": f"LLM error during requirement extraction: {exc}"},
+        }
     keywords = requirements.get("keywords", [])
     print(f"  Keywords extracted: {keywords}")
 
@@ -225,7 +235,17 @@ def rank_job(job: dict, model: str = DEFAULT_MODEL) -> dict:
     role_chunks = query_collection("preferred_roles", cv_query, n_results=3)
 
     # Step 4 — Score fit using LLM
-    details = score_fit(title, requirements, cv_chunks, role_chunks, model)
+    try:
+        details = score_fit(title, requirements, cv_chunks, role_chunks, model)
+    except Exception as exc:
+        print(f"[ERROR] score_fit failed for '{title}': {exc}")
+        return {
+            **job,
+            "score": 0,
+            "decision": "reject",
+            "requirements": requirements,
+            "ranking_details": {"explanation": f"LLM error during scoring: {exc}"},
+        }
     score = details["score"]
     decision = decide(score)
 
@@ -261,7 +281,20 @@ def rank_all_jobs(jobs: list, model: str = DEFAULT_MODEL) -> list:
     Rank a list of jobs. Returns the list sorted by score descending.
     Jobs with decision='reject' are included but appear last.
     """
-    ranked = [rank_job(job, model=model) for job in jobs]
+    ranked = []
+    for job in jobs:
+        try:
+            ranked.append(rank_job(job, model=model))
+        except Exception as exc:
+            title = job.get("title", "Unknown")
+            print(f"[ERROR] rank_job failed for '{title}': {exc}")
+            ranked.append({
+                **job,
+                "score": 0,
+                "decision": "reject",
+                "requirements": {},
+                "ranking_details": {"explanation": f"Ranking error: {exc}"},
+            })
     ranked.sort(key=lambda x: x.get("score", 0), reverse=True)
     return ranked
 

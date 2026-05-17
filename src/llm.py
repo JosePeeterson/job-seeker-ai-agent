@@ -14,6 +14,7 @@ API key lookup order:
 """
 
 import os
+from typing import Optional
 
 
 # --------------------------------------------------------------------------
@@ -27,7 +28,7 @@ def _is_openai_model(model: str) -> bool:
     return model.startswith(("gpt-", "o1-", "o3-"))
 
 
-def _get_openai_key() -> str | None:
+def _get_openai_key() -> Optional[str]:
     key = os.environ.get("OPENAI_API_KEY")
     if key:
         return key
