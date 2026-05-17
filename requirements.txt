@@ -7,6 +7,10 @@ openai>=1.30.0
 # Vector store
 chromadb>=0.5.0
 sentence-transformers>=3.0.0
+# Force up-to-date opentelemetry proto packages whose _pb2.py files
+# are regenerated with protoc >= 3.19 (required on protobuf 4/5+).
+opentelemetry-exporter-otlp-proto-grpc>=1.25.0
+opentelemetry-proto>=1.25.0
 
 # Web scraping (used by job_scraper.py)
 playwright>=1.44.0
