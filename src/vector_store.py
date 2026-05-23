@@ -13,7 +13,10 @@ import json
 from pathlib import Path
 
 import chromadb
-from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
+from chromadb.utils.embedding_functions import (
+    OpenAIEmbeddingFunction,
+    DefaultEmbeddingFunction,
+)
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 CHROMA_DIR = DATA_DIR / "chroma_db"
@@ -38,12 +41,33 @@ def get_client() -> chromadb.ClientAPI:
     return _client
 
 
-def get_embedding_fn() -> SentenceTransformerEmbeddingFunction:
+def get_embedding_fn():
+    """
+    Return the embedding function.
+
+    Uses OpenAI text-embedding-3-small when an API key is available
+    (Streamlit Cloud / any env with OPENAI_API_KEY set).
+    Falls back to ChromaDB's built-in ONNX-based embedder for local
+    development without an OpenAI key — this avoids pulling in PyTorch.
+    """
     global _embedding_fn
     if _embedding_fn is None:
-        _embedding_fn = SentenceTransformerEmbeddingFunction(
-            model_name="all-MiniLM-L6-v2"
-        )
+        import os
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if not api_key:
+            try:
+                import streamlit as st
+                api_key = st.secrets.get("OPENAI_API_KEY")
+            except Exception:
+                pass
+        if api_key:
+            _embedding_fn = OpenAIEmbeddingFunction(
+                api_key=api_key,
+                model_name="text-embedding-3-small",
+            )
+        else:
+            # Lightweight ONNX-based fallback — no PyTorch required
+            _embedding_fn = DefaultEmbeddingFunction()
     return _embedding_fn
 
 

@@ -1,14 +1,15 @@
 # Core UI
-streamlit>=1.35.0
+streamlit>=1.45.0
 
 # LLM backends
 openai>=1.30.0
 
 # Vector store
 chromadb>=0.5.0
-sentence-transformers>=3.0.0
-# Force up-to-date opentelemetry proto packages whose _pb2.py files
-# are regenerated with protoc >= 3.19 (required on protobuf 4/5+).
+# Note: sentence-transformers/PyTorch removed — embeddings use OpenAI API
+# (text-embedding-3-small) to avoid 400-500 MB RAM overhead on Streamlit Cloud.
+# ChromaDB's built-in ONNX embedder is used as a local fallback when no API key
+# is present.
 opentelemetry-exporter-otlp-proto-grpc>=1.25.0
 opentelemetry-proto>=1.25.0
 

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "code documentation",
+  "steps": [
+    {
+      "file": "data/tina_sg_work_visa_note.txt",
+      "description": "need to let LLM know about this information ",
+      "line": 1
+    }
+  ]
+}

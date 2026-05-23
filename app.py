@@ -10,6 +10,7 @@ import sys
 from contextlib import redirect_stdout
 from datetime import date
 from pathlib import Path
+from typing import Tuple
 
 import streamlit as st
 
@@ -43,6 +44,7 @@ st.set_page_config(
 
 # ── Helpers ─────────────────────────────────────────────────────────────────
 
+@st.cache_data(show_spinner=False)
 def _load_ranked() -> list:
     if RANKED_PATH.exists():
         with open(RANKED_PATH) as f:
@@ -66,7 +68,7 @@ def _badge(decision: str) -> str:
     return "🔴 REJECT"
 
 
-def _docs_exist(job: dict) -> tuple[str, str]:
+def _docs_exist(job: dict) -> Tuple[str, str]:
     slug = _slug(job.get("title", ""), job.get("company", ""))
     resume = RESUMES_DIR / f"{slug}.txt"
     cl = COVER_LETTERS_DIR / f"{slug}.txt"
@@ -168,6 +170,18 @@ with st.sidebar:
     st.divider()
 
     st.session_state.model = st.selectbox("LLM model", MODELS, index=MODELS.index(st.session_state.model))
+
+    # ── Auto-ingest CV data if ChromaDB is empty (e.g. fresh Streamlit Cloud deploy) ──
+    if "cv_ingested" not in st.session_state:
+        try:
+            from vector_store import collection_count
+            from ingest import ingest_all
+            if collection_count("cv_chunks") == 0:
+                with st.spinner("Indexing CV data…"):
+                    ingest_all()
+        except Exception as _ingest_err:
+            st.warning(f"Auto-ingest skipped: {_ingest_err}")
+        st.session_state.cv_ingested = True
 
     ranked = _load_ranked()
     if ranked:
@@ -463,6 +477,7 @@ elif page == "⚙️ Run Pipeline":
                     sys.stdout = sys.__stdout__
                     with open(RANKED_PATH, "w") as f:
                         json.dump(ranked, f, indent=2)
+                    _load_ranked.clear()
                     n_apply = sum(1 for j in ranked if j["decision"] == "apply")
                     status.update(label=f"✅ Ranked {len(ranked)} jobs — {n_apply} to apply", state="complete")
                 except Exception as e:
@@ -525,6 +540,7 @@ elif page == "⚙️ Run Pipeline":
                     sys.stdout = sys.__stdout__
                     with open(RANKED_PATH, "w") as f:
                         json.dump(ranked, f, indent=2)
+                    _load_ranked.clear()
                     n_apply = sum(1 for j in ranked if j["decision"] == "apply")
                     status.write(f"✅ Ranked {len(ranked)} jobs — {n_apply} to apply")
                 else:
