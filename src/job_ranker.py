@@ -323,7 +323,7 @@ if __name__ == "__main__":
     from pathlib import Path
 
     DATA_DIR = Path(__file__).parent.parent / "data"
-    jobs_path = DATA_DIR / "scraped_jobs.json"
+    jobs_path = DATA_DIR / "scraped_jobs" / "scraped_jobs.json"
 
     if not jobs_path.exists():
         print(f"[ERROR] {jobs_path} not found. Run job_scraper.py first.")
@@ -345,7 +345,7 @@ if __name__ == "__main__":
     ranked = rank_all_jobs(jobs, model=model)
     print_summary(ranked)
 
-    out_path = DATA_DIR / "ranked_jobs.json"
+    out_path = DATA_DIR / "ranked_jobs" / "ranked_jobs.json"
     with open(out_path, "w") as f:
         json.dump(ranked, f, indent=2)
     print(f"\n[INFO] Results saved to {out_path}")

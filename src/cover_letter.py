@@ -21,7 +21,7 @@ from llm import chat as _llm_chat
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 COVER_LETTERS_DIR = DATA_DIR / "cover_letters"
-CV_PATH = DATA_DIR / "tina_cv.txt"
+CV_PATH = DATA_DIR / "original_resume" / "tina_cv.txt"
 RESUMES_DIR = DATA_DIR / "resumes"
 
 DEFAULT_MODEL = "llama3.1:8b"

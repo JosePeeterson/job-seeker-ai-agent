@@ -101,7 +101,7 @@ def ingest_preferred_roles() -> int:
     collection = get_collection("preferred_roles")
     docs, ids, metas = [], [], []
     for fname in ["tina_academia_roles.json", "tina_industry_roles.json"]:
-        with open(DATA_DIR / fname) as f:
+        with open(DATA_DIR / "preffered_roles" / fname) as f:
             role_areas = json.load(f)
         for area_obj in role_areas[0]:
             area = area_obj["area"]

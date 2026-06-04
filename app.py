@@ -31,9 +31,9 @@ from resume_tailor import tailor_resume, _slug
 from resume_to_pdf import convert_resume as _convert_resume_to_pdf
 
 DATA_DIR = ROOT / "data"
-RANKED_PATH = DATA_DIR / "ranked_jobs.json"
-SCRAPED_PATH = DATA_DIR / "scraped_jobs.json"
-CV_PATH = DATA_DIR / "tina_cv.txt"
+RANKED_PATH = DATA_DIR / "ranked_jobs" / "ranked_jobs.json"
+SCRAPED_PATH = DATA_DIR / "scraped_jobs" / "scraped_jobs.json"
+CV_PATH = DATA_DIR / "original_resume" / "tina_cv.txt"
 DB_PATH = DATA_DIR / "jobs.db"
 RESUMES_DIR = DATA_DIR / "resumes"
 COVER_LETTERS_DIR = DATA_DIR / "cover_letters"

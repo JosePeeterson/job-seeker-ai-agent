@@ -28,9 +28,9 @@ from cover_letter import generate_cover_letter
 from notify import send_digest
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-SCRAPED_PATH = DATA_DIR / "scraped_jobs.json"
-RANKED_PATH = DATA_DIR / "ranked_jobs.json"
-CV_PATH = DATA_DIR / "tina_cv.txt"
+SCRAPED_PATH = DATA_DIR / "scraped_jobs" / "scraped_jobs.json"
+RANKED_PATH = DATA_DIR / "ranked_jobs" / "ranked_jobs.json"
+CV_PATH = DATA_DIR / "original_resume" / "tina_cv.txt"
 
 
 def run(skip_scrape: bool = False, apply_only: bool = False, model: str = DEFAULT_MODEL, notify: bool = False, sources: list = None):

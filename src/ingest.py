@@ -28,10 +28,10 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 
 def ingest_all(force: bool = False) -> None:
     # ------------------------------------------------------------------ CV --
-    cv_path = DATA_DIR / "tina_cv.txt"
+    cv_path = DATA_DIR / "original_resume" / "tina_cv.txt"
     if not cv_path.exists():
         print(
-            "[WARN] data/tina_cv.txt not found.\n"
+            "[WARN] data/original_resume/tina_cv.txt not found.\n"
             "       Please save Tina's CV as plain text to that path and re-run."
         )
     else:

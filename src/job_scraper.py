@@ -52,7 +52,7 @@ def load_keywords():
     keywords = set()
     skipped = set()
     # Load academic roles
-    with open(DATA_DIR / "tina_academia_roles.json") as f:
+    with open(DATA_DIR / "preffered_roles" / "tina_academia_roles.json") as f:
         academia = json.load(f)
         for area in academia[0]:
             for k in [area["area"]] + area["roles"]:
@@ -62,7 +62,7 @@ def load_keywords():
                 else:
                     skipped.add(k)
     # Load industry roles
-    with open(DATA_DIR / "tina_industry_roles.json") as f:
+    with open(DATA_DIR / "preffered_roles" / "tina_industry_roles.json") as f:
         industry = json.load(f)
         for area in industry[0]:
             for k in [area["area"]] + area["roles"]:
@@ -376,7 +376,7 @@ def main():
     else:
         jobs = scrape_all(keywords)
 
-    out_path = DATA_DIR / "scraped_jobs.json"
+    out_path = DATA_DIR / "scraped_jobs" / "scraped_jobs.json"
     with open(out_path, "w") as f:
         json.dump(jobs, f, indent=2)
     print(f"[INFO] Scraped {len(jobs)} jobs. Results saved to {out_path}")

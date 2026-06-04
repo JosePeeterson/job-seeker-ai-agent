@@ -38,8 +38,8 @@ from email.mime.text import MIMEText
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-RANKED_PATH = DATA_DIR / "ranked_jobs.json"
-DIGEST_PATH = DATA_DIR / "digest.html"
+RANKED_PATH = DATA_DIR / "ranked_jobs" / "ranked_jobs.json"
+DIGEST_PATH = DATA_DIR / "jobs_digest" / "digest.html"
 
 DEFAULT_TO = "tinaarshara@gmail.com"
 
