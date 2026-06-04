@@ -36,6 +36,19 @@ def ingest_all(force: bool = False) -> None:
         )
     else:
         if force or collection_count("cv_chunks") == 0:
+
+            try:
+                # delete the existing collection to avoid duplicates ids within cv_chunks
+                from vector_store import get_client
+                client = get_client()
+                print("[INFO] Deleting existing cv_chunks collection (if it exists) to avoid duplicates...")
+                if "cv_chunks" in client.list_collections():
+                    client.delete_collection("cv_chunks")
+            except Exception as e:
+                print(f"[ERROR] Failed to delete existing cv_chunks collection: {e}")
+                print("[ERROR] Please check the ChromaDB directory and try again.")
+                return
+
             cv_text = cv_path.read_text(encoding="utf-8")
             ingest_cv(cv_text)
         else:
@@ -43,6 +56,20 @@ def ingest_all(force: bool = False) -> None:
 
     # -------------------------------------------------------- Preferred roles --
     if force or collection_count("preferred_roles") == 0:
+
+        try:
+            # delete the existing collection to avoid duplicates ids within preferred_roles
+            from vector_store import get_client
+            client = get_client()
+            print("[INFO] Deleting existing preferred_roles collection (if it exists) to avoid duplicates...")
+            if "preferred_roles" in client.list_collections():
+                client.delete_collection("preferred_roles")
+        except Exception as e:
+            print(f"[ERROR] Failed to delete existing preferred_roles collection: {e}")
+            print("[ERROR] Please check the ChromaDB directory and try again.")
+            return
+
+
         ingest_preferred_roles()
     else:
         print(f"[INFO] preferred_roles already has {collection_count('preferred_roles')} entries. Use --force to re-ingest.")

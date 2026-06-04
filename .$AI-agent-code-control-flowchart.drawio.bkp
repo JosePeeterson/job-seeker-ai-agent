@@ -1,0 +1,538 @@
+<mxfile host="Electron" pages="6">
+  <diagram name="app.py" id="V0iOJvd5FEum2_455EFE">
+    <mxGraphModel dx="1178" dy="638" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="3000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="35TDHyBQoIs2vWApa0xx-19" edge="1" parent="1" source="upGvg6ggm6x7o-2m0Vvq-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.625;entryY=0.2;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="35TDHyBQoIs2vWApa0xx-18" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="upGvg6ggm6x7o-2m0Vvq-1" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="app.py" vertex="1">
+          <mxGeometry height="60" width="140" x="430" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="upGvg6ggm6x7o-2m0Vvq-2" parent="upGvg6ggm6x7o-2m0Vvq-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="&amp;nbsp;def main():" vertex="1">
+          <mxGeometry height="30" width="140" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="upGvg6ggm6x7o-2m0Vvq-10" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.16;exitY=0.55;exitDx=0;exitDy=0;exitPerimeter=0;" target="upGvg6ggm6x7o-2m0Vvq-8" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="379" y="200" />
+              <mxPoint x="283" y="200" />
+            </Array>
+            <mxPoint x="430" y="155" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="upGvg6ggm6x7o-2m0Vvq-15" edge="1" parent="1" source="upGvg6ggm6x7o-2m0Vvq-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="upGvg6ggm6x7o-2m0Vvq-14" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="upGvg6ggm6x7o-2m0Vvq-8" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;span style=&quot;color: #c586c0;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;cv_ingested&quot;&lt;/span&gt; &lt;br/&gt;&lt;span style=&quot;color: #569cd6;&quot;&gt;not&lt;/span&gt; &lt;span style=&quot;color: #569cd6;&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #4ec9b0;&quot;&gt;st&lt;/span&gt;.&lt;span style=&quot;color: #c9d1d9;&quot;&gt;session_state&lt;/span&gt;:&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="285" x="140" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="upGvg6ggm6x7o-2m0Vvq-22" edge="1" parent="1" source="upGvg6ggm6x7o-2m0Vvq-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="upGvg6ggm6x7o-2m0Vvq-21" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="upGvg6ggm6x7o-2m0Vvq-14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: #d2a8ff;&quot;&gt;ingest_all()&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="222.5" y="405" as="geometry" />
+        </mxCell>
+        <mxCell id="upGvg6ggm6x7o-2m0Vvq-16" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="yes" vertex="1">
+          <mxGeometry height="30" width="60" x="222.5" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-2" edge="1" parent="1" source="upGvg6ggm6x7o-2m0Vvq-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="35TDHyBQoIs2vWApa0xx-1" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="upGvg6ggm6x7o-2m0Vvq-21" parent="1" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;rotation=-180;size=20;flipV=0;flipH=0;textDirection=vertical-rl;horizontal=0;direction=east;" value="ingest.py" vertex="1">
+          <mxGeometry height="50" width="100" x="100" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-7" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="35TDHyBQoIs2vWApa0xx-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-1" parent="1" style="whiteSpace=wrap;html=1;textDirection=vertical-rl;horizontal=0;" value="Creates two chromaDB collections: &quot;cv_chunks&quot; and &quot;preferred_roles&quot;" vertex="1">
+          <mxGeometry height="70" width="180" x="62.5" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Returns" vertex="1">
+          <mxGeometry height="30" width="60" x="90" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-12" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-11" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-4" parent="1" style="whiteSpace=wrap;html=1;textDirection=vertical-rl;horizontal=0;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: rgb(78, 201, 176);&quot;&gt;json&lt;/span&gt;.&lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;load&lt;/span&gt;(&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;f&lt;/span&gt;)&lt;br/&gt;&lt;br/&gt;get from &lt;span style=&quot;color: rgb(165, 214, 255); background-color: rgb(18, 19, 20);&quot;&gt;&quot;ranked_jobs.json&quot;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="227.5" x="38.75" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-8" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-6" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="ranked = _load_ranked()" vertex="1">
+          <mxGeometry height="80" width="120" x="91.25" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-14" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-11" parent="1" style="rhombus;whiteSpace=wrap;html=1;textDirection=vertical-rl;horizontal=0;" value="if ranked:" vertex="1">
+          <mxGeometry height="80" width="107.5" x="98.75" y="935" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-13" parent="1" style="whiteSpace=wrap;html=1;textDirection=vertical-rl;horizontal=0;" value="get the number of apply, maybe and reject" vertex="1">
+          <mxGeometry height="60" width="120" x="92.5" y="1060" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-15" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="yes" vertex="1">
+          <mxGeometry height="30" width="60" x="91" y="1015" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-18" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" value="st.sidebar:" vertex="1">
+          <mxGeometry height="80" width="120" x="360" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-29" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-28" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-20" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" value="&amp;nbsp; if page == Dashboard&quot;:" vertex="1">
+          <mxGeometry height="80" width="120" x="480" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-24" edge="1" parent="1" source="upGvg6ggm6x7o-2m0Vvq-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.625;entryY=0.2;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.471;exitY=1.017;exitDx=0;exitDy=0;exitPerimeter=0;" target="35TDHyBQoIs2vWApa0xx-20" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="120" as="sourcePoint" />
+            <mxPoint x="490" y="146" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-31" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-30" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-26" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" value="elif run pipeline:" vertex="1">
+          <mxGeometry height="80" width="120" x="1045" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-27" edge="1" parent="1" source="upGvg6ggm6x7o-2m0Vvq-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.16;entryY=0.55;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="35TDHyBQoIs2vWApa0xx-26" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="550" y="130" as="sourcePoint" />
+            <mxPoint x="609" y="215" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-28" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="display ranked_jobs&lt;div&gt;and custom_resume and custom_cl&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="480" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-33" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-32" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-30" parent="1" style="whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;with&lt;/span&gt; &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;col_opts&lt;/span&gt;:&lt;br&gt;&lt;br&gt;get selection &lt;br&gt;from the user&lt;/div&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;1) what sources to scrape&lt;br&gt;from&lt;/div&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;2) skip scrape&lt;/div&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;3) skip rank&lt;/div&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;4) generate docs? (cv and cl). &lt;/div&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;  &lt;/div&gt;" vertex="1">
+          <mxGeometry height="210" width="300" x="955" y="158.75" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-42" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1115" y="608.75" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-32" parent="1" style="whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;with&lt;/span&gt; &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;col_info&lt;/span&gt;:&lt;/div&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;get the &lt;br/&gt;1) number of scraped jobs&lt;br/&gt;2) ranked jobs&lt;/div&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;3) resume count&lt;/div&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;4)CL count&lt;/div&gt;" vertex="1">
+          <mxGeometry height="165" width="230" x="990" y="408.75" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-41" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-40" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-34" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: #c586c0;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #c9d1d9;&quot;&gt;c1&lt;/span&gt;.&lt;span style=&quot;color: #d2a8ff;&quot;&gt;button&lt;/span&gt;(&lt;br/&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;🕷️ Scrape only&quot;&lt;/span&gt;, &lt;br/&gt;&lt;span style=&quot;color: #ffa657;&quot;&gt;width&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;stretch&quot;&lt;/span&gt;):&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="280" x="975" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-37" parent="1" style="whiteSpace=wrap;html=1;" value="if c2.button(rank_only):" vertex="1">
+          <mxGeometry height="70" width="200" x="1005" y="865" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-39" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;span style=&quot;color: #c586c0;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #c9d1d9;&quot;&gt;c3&lt;/span&gt;.&lt;span style=&quot;color: #d2a8ff;&quot;&gt;button&lt;/span&gt;(&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;📝 Generate docs&quot;&lt;/span&gt;, &lt;span style=&quot;color: #ffa657;&quot;&gt;width&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;stretch&quot;&lt;/span&gt;):&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="280" x="1420" y="755" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-40" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;span style=&quot;color: #c586c0;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #c9d1d9;&quot;&gt;c2&lt;/span&gt;.&lt;span style=&quot;color: #d2a8ff;&quot;&gt;button&lt;/span&gt;(&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;🏆 Rank only&quot;&lt;/span&gt;, &lt;span style=&quot;color: #ffa657;&quot;&gt;width&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;stretch&quot;&lt;/span&gt;):&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="182.5" width="272.5" x="390" y="608.75" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-49" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-48" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-51" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-50" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-43" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;span style=&quot;color: #c586c0;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #569cd6;&quot;&gt;not&lt;/span&gt; &lt;span style=&quot;color: #c9d1d9;&quot;&gt;skip_scrape&lt;/span&gt;:&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="280" x="1860" y="1080" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-44" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="35TDHyBQoIs2vWApa0xx-39" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1270" y="700" as="sourcePoint" />
+            <mxPoint x="1560" y="660" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-45" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="35TDHyBQoIs2vWApa0xx-43" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1550" y="700" as="sourcePoint" />
+            <mxPoint x="2025" y="765" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-53" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-52" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-55" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-54" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-46" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;span style=&quot;color: #c586c0;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #569cd6;&quot;&gt;not&lt;/span&gt; &lt;span style=&quot;color: #c9d1d9;&quot;&gt;skip_rank&lt;/span&gt;:&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="105" width="280" x="1860" y="1700" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-59" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-58" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-61" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-60" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-47" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;span style=&quot;color: #c586c0;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #c9d1d9;&quot;&gt;gen_docs&lt;/span&gt;:&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="280" x="1860" y="2240" as="geometry" />
+        </mxCell>
+        <mxCell id="2lUpFc3rzKbnz6XBkhn2-4" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="2lUpFc3rzKbnz6XBkhn2-2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-48" parent="1" style="whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;from&lt;/span&gt; &lt;span style=&quot;color: rgb(78, 201, 176);&quot;&gt;job_scraper&lt;/span&gt; &lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;import&lt;/span&gt; &lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;scrape_all&lt;/span&gt;, &lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;load_keywords&lt;/span&gt;&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;keywords&lt;/span&gt; &lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;load_keywords&lt;/span&gt;()&lt;br&gt;&lt;br&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;jobs&lt;/span&gt; &lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;scrape_all&lt;/span&gt;(&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;keywords&lt;/span&gt;, &lt;br&gt;&lt;span style=&quot;color: rgb(255, 166, 87);&quot;&gt;sources&lt;/span&gt;&lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;selected_sources&lt;/span&gt;, &lt;br&gt;&lt;span style=&quot;color: rgb(255, 166, 87);&quot;&gt;fetch_full_descriptions&lt;/span&gt;&lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: rgb(86, 156, 214);&quot;&gt;True&lt;/span&gt;)&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="205" width="410" x="1795" y="1335" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-50" parent="1" style="whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="60" width="120" x="2220" y="1140" as="geometry" />
+        </mxCell>
+        <mxCell id="Or8HYmdxj6-5exsU-s0e-5" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Or8HYmdxj6-5exsU-s0e-4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-52" parent="1" style="whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;from&lt;/span&gt; &lt;span style=&quot;color: rgb(78, 201, 176);&quot;&gt;job_ranker&lt;/span&gt; &lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;import&lt;/span&gt; &lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;rank_all_jobs&lt;br&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;ranked&lt;/span&gt; &lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #d2a8ff;&quot;&gt;rank_all_jobs&lt;/span&gt;(&lt;br/&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;jobs&lt;/span&gt;, &lt;span style=&quot;color: #ffa657;&quot;&gt;model&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #4ec9b0;&quot;&gt;st&lt;/span&gt;.&lt;span style=&quot;color: #c9d1d9;&quot;&gt;session_state&lt;/span&gt;.&lt;span style=&quot;color: #c9d1d9;&quot;&gt;model&lt;/span&gt;)&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;/div&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="145" width="330" x="1835" y="1870" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-54" parent="1" style="whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="60" width="120" x="2220" y="1722.5" as="geometry" />
+        </mxCell>
+        <mxCell id="TUeLfUApyYQ6fAeEmceB-5" edge="1" parent="1" source="35TDHyBQoIs2vWApa0xx-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="TUeLfUApyYQ6fAeEmceB-2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-58" parent="1" style="whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;from&lt;/span&gt; &lt;span style=&quot;color: rgb(78, 201, 176);&quot;&gt;resume_tailor&lt;/span&gt; &lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;import&lt;/span&gt; &lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;tailor_resume&lt;/span&gt;, &lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;_slug&lt;br&gt;&lt;br&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;apply_jobs&lt;/span&gt; &lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt; [&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;j&lt;/span&gt; &lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;for&lt;/span&gt; &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;j&lt;/span&gt; &lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;ranked&lt;/span&gt; &lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;j&lt;/span&gt;[&lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&quot;decision&quot;&lt;/span&gt;] &lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;==&lt;/span&gt; &lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&quot;apply&quot;&lt;/span&gt;]&lt;/div&gt;&lt;div&gt;   &lt;/div&gt;&lt;div&gt;                    &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;cv_text&lt;/span&gt; &lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: rgb(121, 192, 255);&quot;&gt;CV_PATH&lt;/span&gt;.&lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;read_text&lt;/span&gt;()&lt;/div&gt;&lt;div&gt;                    &lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;for&lt;/span&gt; &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;job&lt;/span&gt; &lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;apply_jobs&lt;/span&gt;:&lt;/div&gt;&lt;div&gt;                        &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;r&lt;/span&gt;, &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;c&lt;/span&gt; &lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;_docs_exist&lt;/span&gt;(&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;job&lt;/span&gt;)&lt;/div&gt;&lt;div&gt;                        &lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: rgb(86, 156, 214);&quot;&gt;not&lt;/span&gt; &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;r&lt;/span&gt;:&lt;/div&gt;&lt;div&gt;                            &lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;tailor_resume&lt;/span&gt;(&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;job&lt;/span&gt;, &lt;span style=&quot;color: rgb(255, 166, 87);&quot;&gt;cv_text&lt;/span&gt;&lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;cv_text&lt;/span&gt;, &lt;span style=&quot;color: rgb(255, 166, 87);&quot;&gt;model&lt;/span&gt;&lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: rgb(78, 201, 176);&quot;&gt;st&lt;/span&gt;.&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;session_state&lt;/span&gt;.&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;model&lt;/span&gt;)&lt;/div&gt;&lt;div&gt;                        &lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: rgb(86, 156, 214);&quot;&gt;not&lt;/span&gt; &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;c&lt;/span&gt;:&lt;/div&gt;&lt;div&gt;                            &lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;generate_cover_letter&lt;/span&gt;(&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;job&lt;/span&gt;, &lt;span style=&quot;color: rgb(255, 166, 87);&quot;&gt;model&lt;/span&gt;&lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: rgb(78, 201, 176);&quot;&gt;st&lt;/span&gt;.&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;session_state&lt;/span&gt;.&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;model&lt;/span&gt;)&lt;/div&gt;&lt;/div&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="220" width="690" x="1655" y="2420" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-60" parent="1" style="whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="60" width="120" x="2410" y="2165" as="geometry" />
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-63" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="35TDHyBQoIs2vWApa0xx-62" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1550" y="700" as="sourcePoint" />
+            <mxPoint x="2000" y="1080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="35TDHyBQoIs2vWApa0xx-62" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;c4&lt;/span&gt;.&lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;button&lt;/span&gt;(&lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&quot;🚀&lt;br/&gt; Full pipeline&quot;&lt;/span&gt;, &lt;br/&gt;&lt;span style=&quot;color: rgb(255, 166, 87);&quot;&gt;width&lt;/span&gt;&lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&quot;stretch&quot;&lt;/span&gt;, &lt;br/&gt;&lt;span style=&quot;color: rgb(255, 166, 87);&quot;&gt;type&lt;/span&gt;&lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&quot;primary&quot;&lt;/span&gt;):&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="280" x="1860" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="2lUpFc3rzKbnz6XBkhn2-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="True" vertex="1">
+          <mxGeometry height="30" width="60" x="1930" y="1280" as="geometry" />
+        </mxCell>
+        <mxCell id="2lUpFc3rzKbnz6XBkhn2-2" parent="1" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="job_scraper.py" vertex="1">
+          <mxGeometry height="47.5" width="150" x="2290" y="1413.75" as="geometry" />
+        </mxCell>
+        <mxCell id="2lUpFc3rzKbnz6XBkhn2-5" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="1dH96ObcIe01GXJqbAdO-4" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2360" y="1461" />
+              <mxPoint x="2360" y="1640" />
+            </Array>
+            <mxPoint x="2355" y="1461.25" as="sourcePoint" />
+            <mxPoint x="2180" y="1600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1dH96ObcIe01GXJqbAdO-3" edge="1" parent="1" source="1dH96ObcIe01GXJqbAdO-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.033;exitY=0.482;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" target="35TDHyBQoIs2vWApa0xx-46" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2000" y="1640" />
+            </Array>
+            <mxPoint x="2070" y="1600" as="sourcePoint" />
+            <mxPoint x="2340" y="1739" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1dH96ObcIe01GXJqbAdO-4" parent="1" style="shape=card;whiteSpace=wrap;html=1;" value="scraped_jobs.json" vertex="1">
+          <mxGeometry height="60" width="160" x="2030" y="1610" as="geometry" />
+        </mxCell>
+        <mxCell id="Or8HYmdxj6-5exsU-s0e-1" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Or8HYmdxj6-5exsU-s0e-2" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2165" y="1944.25" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Or8HYmdxj6-5exsU-s0e-2" parent="1" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="job_rankerpy" vertex="1">
+          <mxGeometry height="47.5" width="150" x="2250" y="1920" as="geometry" />
+        </mxCell>
+        <mxCell id="Or8HYmdxj6-5exsU-s0e-3" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="Or8HYmdxj6-5exsU-s0e-4" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2320" y="1968" />
+              <mxPoint x="2320" y="2160" />
+            </Array>
+            <mxPoint x="2315" y="1967.5" as="sourcePoint" />
+            <mxPoint x="2140" y="2106.25" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Or8HYmdxj6-5exsU-s0e-6" edge="1" parent="1" source="Or8HYmdxj6-5exsU-s0e-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="35TDHyBQoIs2vWApa0xx-47" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Or8HYmdxj6-5exsU-s0e-4" parent="1" style="shape=card;whiteSpace=wrap;html=1;" value="ranked_jobs.json" vertex="1">
+          <mxGeometry height="60" width="160" x="1920" y="2130" as="geometry" />
+        </mxCell>
+        <mxCell id="TUeLfUApyYQ6fAeEmceB-2" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;r&lt;/span&gt;, &lt;span style=&quot;color: #c9d1d9;&quot;&gt;c&lt;/span&gt; &lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #d2a8ff;&quot;&gt;_docs_exist&lt;/span&gt;(&lt;span style=&quot;color: #c9d1d9;&quot;&gt;job&lt;/span&gt;)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="230" x="1885" y="2690" as="geometry" />
+        </mxCell>
+        <mxCell id="TUeLfUApyYQ6fAeEmceB-3" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;tailor_resume&lt;/span&gt;(&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;job&lt;/span&gt;, &lt;span style=&quot;color: rgb(255, 166, 87);&quot;&gt;cv_text&lt;/span&gt;&lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;cv_text&lt;/span&gt;, &lt;br/&gt;&lt;span style=&quot;color: rgb(255, 166, 87);&quot;&gt;model&lt;/span&gt;&lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: rgb(78, 201, 176);&quot;&gt;st&lt;/span&gt;.&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;session_state&lt;/span&gt;.&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;model&lt;/span&gt;)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="320" x="1860" y="2800" as="geometry" />
+        </mxCell>
+        <mxCell id="TUeLfUApyYQ6fAeEmceB-4" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="80" width="120" x="2305" y="2700" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="guOn5faZrPCS0prrRqMc" name="ingest.py">
+    <mxGraphModel dx="846" dy="564" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="XO1mx6tINxkavqUH7l0p-1" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="ingest.py" vertex="1">
+          <mxGeometry height="60" width="140" x="570" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XO1mx6tINxkavqUH7l0p-2" parent="XO1mx6tINxkavqUH7l0p-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="&amp;nbsp;def main():" vertex="1">
+          <mxGeometry height="30" width="140" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="XO1mx6tINxkavqUH7l0p-10" edge="1" parent="1" source="XO1mx6tINxkavqUH7l0p-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="XO1mx6tINxkavqUH7l0p-9" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XO1mx6tINxkavqUH7l0p-3" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="ingest_all():" vertex="1">
+          <mxGeometry height="30" width="120" x="580" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="XO1mx6tINxkavqUH7l0p-6" edge="1" parent="1" source="XO1mx6tINxkavqUH7l0p-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="XO1mx6tINxkavqUH7l0p-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XO1mx6tINxkavqUH7l0p-12" edge="1" parent="1" source="XO1mx6tINxkavqUH7l0p-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="XO1mx6tINxkavqUH7l0p-11" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XO1mx6tINxkavqUH7l0p-9" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="if&amp;nbsp;&lt;span style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre; color: rgb(210, 168, 255);&quot;&gt;collection_count&lt;/span&gt;&lt;span style=&quot;background-color: rgb(18, 19, 20); color: rgb(187, 190, 191); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre;&quot;&gt;(&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre; color: rgb(165, 214, 255);&quot;&gt;&quot;cv_chunks&quot;&lt;/span&gt;&lt;span style=&quot;background-color: rgb(18, 19, 20); color: rgb(187, 190, 191); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre;&quot;&gt;) &lt;/span&gt;&lt;span style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre; color: rgb(212, 212, 212);&quot;&gt;==&lt;/span&gt;&lt;span style=&quot;background-color: rgb(18, 19, 20); color: rgb(187, 190, 191); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre; color: rgb(181, 206, 168);&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;background-color: rgb(18, 19, 20); color: rgb(187, 190, 191); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre;&quot;&gt;:&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="250" x="515" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="XO1mx6tINxkavqUH7l0p-14" edge="1" parent="1" source="XO1mx6tINxkavqUH7l0p-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="XO1mx6tINxkavqUH7l0p-13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XO1mx6tINxkavqUH7l0p-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: #d2a8ff;&quot;&gt;ingest_cv&lt;/span&gt;(&lt;span style=&quot;color: #c9d1d9;&quot;&gt;cv_text&lt;/span&gt;)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="210" x="535" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="XO1mx6tINxkavqUH7l0p-16" edge="1" parent="1" source="XO1mx6tINxkavqUH7l0p-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="XO1mx6tINxkavqUH7l0p-15" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XO1mx6tINxkavqUH7l0p-13" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: rgb(255, 166, 87);&quot;&gt;force&lt;/span&gt; &lt;span style=&quot;color: rgb(86, 156, 214);&quot;&gt;or&lt;/span&gt; &lt;br&gt;&lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;collection_count&lt;/span&gt;(&lt;br&gt;&lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&quot;preferred_roles&quot;&lt;/span&gt;) &lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;==&lt;/span&gt; &lt;span style=&quot;color: rgb(181, 206, 168);&quot;&gt;0&lt;/span&gt;:&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="200" width="305" x="487.5" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="ALFWauVtAG7rC3X8W_ap-2" edge="1" parent="1" source="XO1mx6tINxkavqUH7l0p-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="ALFWauVtAG7rC3X8W_ap-1" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XO1mx6tINxkavqUH7l0p-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre; background-color: rgb(220, 221, 222); color: rgb(210, 168, 255);&quot;&gt;ingest_preferred_roles&lt;/span&gt;&lt;span style=&quot;color: rgb(73, 75, 76); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre; background-color: rgb(220, 221, 222);&quot;&gt;()&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="190" x="545" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="ljv1rYMNRAsD2WLkBTf1-2" edge="1" parent="1" source="ALFWauVtAG7rC3X8W_ap-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="ljv1rYMNRAsD2WLkBTf1-1" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ALFWauVtAG7rC3X8W_ap-1" parent="1" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="vector_store.py" vertex="1">
+          <mxGeometry height="60" width="120" x="840" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="ljv1rYMNRAsD2WLkBTf1-1" parent="1" style="whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;len&lt;/span&gt;(&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;docs&lt;/span&gt;)&lt;br&gt; docs is tuple of (area, roles, fit)&lt;br/&gt;i.e. number of possible preferred &lt;br/&gt;jobs that we can apply for. &lt;br/&gt; &lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="300" x="750" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="ljv1rYMNRAsD2WLkBTf1-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Text" vertex="1">
+          <mxGeometry height="30" width="60" x="610" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="ljv1rYMNRAsD2WLkBTf1-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Text" vertex="1">
+          <mxGeometry height="30" width="60" x="610" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="ljv1rYMNRAsD2WLkBTf1-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Returns" vertex="1">
+          <mxGeometry height="30" width="60" x="910" y="830" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="yGTtPkxaJOS3L2m96Oh0" name="vector_store.py">
+    <mxGraphModel dx="846" dy="564" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rUhJZkgxdqDgR5eJRnth-1" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="vector_store.py" vertex="1">
+          <mxGeometry height="70" width="230" x="370" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="rUhJZkgxdqDgR5eJRnth-2" parent="rUhJZkgxdqDgR5eJRnth-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="&amp;nbsp;def&amp;nbsp;&lt;span style=&quot;color: rgb(210, 168, 255); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre;&quot;&gt;ingest_preferred_roles&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(&lt;br&gt;):&lt;/span&gt;" vertex="1">
+          <mxGeometry height="40" width="230" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rUhJZkgxdqDgR5eJRnth-4" edge="1" parent="1" source="rUhJZkgxdqDgR5eJRnth-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="rUhJZkgxdqDgR5eJRnth-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="470" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rUhJZkgxdqDgR5eJRnth-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-weight: normal; font-size: 12px; line-height: 18px; white-space: pre;&quot;&gt;&lt;div style=&quot;color: light-dark(rgb(187, 190, 191), rgb(73, 75, 76));&quot;&gt;&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;collection&lt;/span&gt;&lt;span style=&quot;color: rgb(187, 190, 191);&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: rgb(187, 190, 191);&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;get_collection&lt;/span&gt;&lt;span style=&quot;color: rgb(187, 190, 191);&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&quot;preferred_roles&quot;&lt;/span&gt;&lt;span style=&quot;color: rgb(187, 190, 191);&quot;&gt;)&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;color: light-dark(rgb(187, 190, 191), rgb(73, 75, 76));&quot;&gt;# above creates a empty collection called &lt;br&gt;&quot;preferred_roles&quot;&lt;/div&gt;&lt;div style=&quot;color: light-dark(rgb(187, 190, 191), rgb(73, 75, 76));&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;color: light-dark(rgb(187, 190, 191), rgb(0, 0, 204));&quot;&gt;source data taken from tina_academia_roles.json&quot;&lt;span style=&quot;background-color: rgb(18, 19, 20);&quot;&gt;,&lt;br&gt; &lt;/span&gt;&quot;tina_industry_roles.json&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;font style=&quot;&quot;&gt;We chunk the text of (area, roles, fit) and put &lt;br/&gt;inside &quot;&lt;/font&gt;&lt;span style=&quot;background-color: light-dark(rgb(18, 19, 20), rgb(220, 221, 222));&quot;&gt;preferred_roles&quot; &lt;/span&gt;&lt;span style=&quot;background-color: light-dark(rgb(18, 19, 20), rgb(220, 221, 222));&quot;&gt;collection&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;color: light-dark(rgb(187, 190, 191), rgb(73, 75, 76));&quot;&gt;&lt;span style=&quot;color: rgb(187, 190, 191);&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="390" x="280" y="180" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="sykyoIl8_H3Q5KCsvn8_" name="job_scraper.py">
+    <mxGraphModel dx="1885" dy="1021" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="3000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vn9en-3cEQDyR7scDkax-1" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="job_scraper.py" vertex="1">
+          <mxGeometry height="70" width="230" x="420" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-2" parent="vn9en-3cEQDyR7scDkax-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="def main():" vertex="1">
+          <mxGeometry height="40" width="230" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-7" edge="1" parent="1" source="vn9en-3cEQDyR7scDkax-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="vn9en-3cEQDyR7scDkax-6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-8" edge="1" parent="1" source="vn9en-3cEQDyR7scDkax-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="vn9en-3cEQDyR7scDkax-5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-9" edge="1" parent="1" source="vn9en-3cEQDyR7scDkax-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="vn9en-3cEQDyR7scDkax-4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-3" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="if source = jobstreet" vertex="1">
+          <mxGeometry height="120" width="172.5" x="446.25" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="scraped_jobs.json" vertex="1">
+          <mxGeometry height="60" width="120" x="157.5" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="scraped_jobs.json" vertex="1">
+          <mxGeometry height="60" width="120" x="472.5" y="850" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="scraped_jobs.json" vertex="1">
+          <mxGeometry height="60" width="120" x="757.5" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-10" edge="1" parent="1" source="vn9en-3cEQDyR7scDkax-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="vn9en-3cEQDyR7scDkax-16" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="545" y="260" as="sourcePoint" />
+            <mxPoint x="430" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-12" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="All" vertex="1">
+          <mxGeometry height="30" width="60" x="472.5" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-13" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Linkedin" vertex="1">
+          <mxGeometry height="30" width="60" x="647.5" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-14" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="jobstreeet" vertex="1">
+          <mxGeometry height="30" width="60" x="357.5" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-18" edge="1" parent="1" source="vn9en-3cEQDyR7scDkax-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="vn9en-3cEQDyR7scDkax-3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Read&amp;nbsp;&lt;span style=&quot;color: rgb(165, 214, 255); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre;&quot;&gt;tina_academia_roles.json&lt;br&gt; and &lt;/span&gt;&lt;span style=&quot;color: rgb(165, 214, 255); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre;&quot;&gt;tina_industry_roles.json files and&lt;br&gt;append area string to list of all&lt;br&gt; roles strings in that area to&lt;br/&gt;create keywords&lt;br&gt;&lt;br&gt;keywords is a list of strings to search for&lt;br&gt;during job scraping&lt;/span&gt;" vertex="1">
+          <mxGeometry height="200" width="382.5" x="341.25" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-17" edge="1" parent="1" source="vn9en-3cEQDyR7scDkax-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="vn9en-3cEQDyR7scDkax-15" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vn9en-3cEQDyR7scDkax-16" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;meta charset=&quot;utf-8&quot;&gt;&lt;span style=&quot;color: rgb(255, 255, 255); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(27, 29, 30); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;keywords = load_keywords()&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="120" x="472.5" y="260" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="trPoEmYxpgTNz8RffABz" name="job_ranker.py">
+    <mxGraphModel dx="2020" dy="1094" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="3000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Sr35r4moxczdWwfFr7Ax-1" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="job_ranker.py" vertex="1">
+          <mxGeometry height="70" width="230" x="560" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Sr35r4moxczdWwfFr7Ax-2" parent="Sr35r4moxczdWwfFr7Ax-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="def main():" vertex="1">
+          <mxGeometry height="40" width="230" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Sr35r4moxczdWwfFr7Ax-3" edge="1" parent="1" source="Sr35r4moxczdWwfFr7Ax-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="iL2oI-eU12owqUleftv9-1" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="830" y="-70" as="sourcePoint" />
+            <mxPoint x="955" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-10" edge="1" parent="1" source="Sr35r4moxczdWwfFr7Ax-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="iL2oI-eU12owqUleftv9-9" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Sr35r4moxczdWwfFr7Ax-4" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;ranked&lt;/span&gt; &lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #d2a8ff;&quot;&gt;rank_all_jobs&lt;/span&gt;(&lt;span style=&quot;color: #c9d1d9;&quot;&gt;jobs&lt;/span&gt;, &lt;span style=&quot;color: #ffa657;&quot;&gt;model&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;model&lt;/span&gt;)&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="350" x="510" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-2" edge="1" parent="1" source="iL2oI-eU12owqUleftv9-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Sr35r4moxczdWwfFr7Ax-4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;jobs_path&lt;/span&gt; &lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: rgb(121, 192, 255);&quot;&gt;DATA_DIR&lt;/span&gt; &lt;span style=&quot;color: rgb(220, 220, 170);&quot;&gt;/&lt;/span&gt; &lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&quot;scraped_jobs.json&quot;&lt;br&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;div&gt;    &lt;span style=&quot;color: #c586c0;&quot;&gt;with&lt;/span&gt; &lt;span style=&quot;color: #d2a8ff;&quot;&gt;open&lt;/span&gt;(&lt;span style=&quot;color: #c9d1d9;&quot;&gt;jobs_path&lt;/span&gt;) &lt;span style=&quot;color: #c586c0;&quot;&gt;as&lt;/span&gt; &lt;span style=&quot;color: #c9d1d9;&quot;&gt;f&lt;/span&gt;:&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: #c9d1d9;&quot;&gt;jobs&lt;/span&gt; &lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #4ec9b0;&quot;&gt;json&lt;/span&gt;.&lt;span style=&quot;color: #d2a8ff;&quot;&gt;load&lt;/span&gt;(&lt;span style=&quot;color: #c9d1d9;&quot;&gt;f&lt;/span&gt;)&lt;/div&gt;&lt;/div&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="335" x="517.5" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-8" edge="1" parent="1" source="iL2oI-eU12owqUleftv9-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="iL2oI-eU12owqUleftv9-7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-5" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;requirements&lt;/span&gt; &lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #d2a8ff;&quot;&gt;extract_requirements&lt;/span&gt;(&lt;span style=&quot;color: #c9d1d9;&quot;&gt;job_desc&lt;/span&gt;, &lt;span style=&quot;color: #ffa657;&quot;&gt;model&lt;/span&gt;)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="485" x="442.5" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-13" edge="1" parent="1" source="iL2oI-eU12owqUleftv9-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="iL2oI-eU12owqUleftv9-12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-7" parent="1" style="whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;ranked&lt;/span&gt;.&lt;span style=&quot;color: #d2a8ff;&quot;&gt;sort&lt;/span&gt;(&lt;span style=&quot;color: #ffa657;&quot;&gt;key&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #ff7b72;&quot;&gt;lambda&lt;/span&gt; &lt;span style=&quot;color: #ffa657;&quot;&gt;x&lt;/span&gt;: &lt;span style=&quot;color: #ffa657;&quot;&gt;x&lt;/span&gt;.get(&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;score&quot;&lt;/span&gt;, &lt;span style=&quot;color: #b5cea8;&quot;&gt;0&lt;/span&gt;),&lt;br/&gt; &lt;span style=&quot;color: #ffa657;&quot;&gt;reverse&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #569cd6;&quot;&gt;True&lt;/span&gt;)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="332.5" x="518.75" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-11" edge="1" parent="1" source="iL2oI-eU12owqUleftv9-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="iL2oI-eU12owqUleftv9-5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;ranked&lt;/span&gt;.&lt;span style=&quot;color: #d2a8ff;&quot;&gt;append&lt;/span&gt;(&lt;span style=&quot;color: #d2a8ff;&quot;&gt;rank_job&lt;/span&gt;(&lt;span style=&quot;color: #c9d1d9;&quot;&gt;job&lt;/span&gt;, &lt;span style=&quot;color: #ffa657;&quot;&gt;model&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #ffa657;&quot;&gt;model&lt;/span&gt;))&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="360" x="505" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="_o6PqBTO9TZkf65g1Url-6" edge="1" parent="1" source="iL2oI-eU12owqUleftv9-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="_o6PqBTO9TZkf65g1Url-5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_o6PqBTO9TZkf65g1Url-7" edge="1" parent="1" source="iL2oI-eU12owqUleftv9-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="_o6PqBTO9TZkf65g1Url-2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-12" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;details&lt;/span&gt; &lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;score_fit&lt;/span&gt;(&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;title&lt;/span&gt;, &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;requirements&lt;/span&gt;,&lt;br/&gt; &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;cv_chunks&lt;/span&gt;, &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;role_chunks&lt;/span&gt;, &lt;span style=&quot;color: rgb(255, 166, 87);&quot;&gt;model&lt;/span&gt;)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="370" x="500" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-20" edge="1" parent="1" source="iL2oI-eU12owqUleftv9-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="iL2oI-eU12owqUleftv9-19" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-14" parent="1" style="whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;div&gt;   &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;out_path&lt;/span&gt; &lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: rgb(121, 192, 255);&quot;&gt;DATA_DIR&lt;/span&gt; &lt;span style=&quot;color: rgb(220, 220, 170);&quot;&gt;/&lt;/span&gt; &lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&quot;ranked_jobs.json&quot;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;    &lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;with&lt;/span&gt; &lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;open&lt;/span&gt;(&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;out_path&lt;/span&gt;, &lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&quot;w&quot;&lt;/span&gt;) &lt;span style=&quot;color: rgb(197, 134, 192);&quot;&gt;as&lt;/span&gt; &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;f&lt;/span&gt;:&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: rgb(78, 201, 176);&quot;&gt;json&lt;/span&gt;.&lt;span style=&quot;color: rgb(210, 168, 255);&quot;&gt;dump&lt;/span&gt;(&lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;ranked&lt;/span&gt;, &lt;span style=&quot;color: rgb(201, 209, 217);&quot;&gt;f&lt;/span&gt;, &lt;span style=&quot;color: rgb(255, 166, 87);&quot;&gt;indent&lt;/span&gt;&lt;span style=&quot;color: rgb(212, 212, 212);&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: rgb(181, 206, 168);&quot;&gt;2&lt;/span&gt;)&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="337.5" x="515" y="1560" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-18" edge="1" parent="1" source="iL2oI-eU12owqUleftv9-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="iL2oI-eU12owqUleftv9-14" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-16" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: #d2a8ff;&quot;&gt;print_summary&lt;/span&gt;(&lt;span style=&quot;color: #c9d1d9;&quot;&gt;ranked&lt;/span&gt;)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="200" x="585" y="1430" as="geometry" />
+        </mxCell>
+        <mxCell id="iL2oI-eU12owqUleftv9-19" parent="1" style="shape=card;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;ranked_jobs.json&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="130" x="618.75" y="1700" as="geometry" />
+        </mxCell>
+        <mxCell id="_o6PqBTO9TZkf65g1Url-4" edge="1" parent="1" source="_o6PqBTO9TZkf65g1Url-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="_o6PqBTO9TZkf65g1Url-3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_o6PqBTO9TZkf65g1Url-8" edge="1" parent="1" source="_o6PqBTO9TZkf65g1Url-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="iL2oI-eU12owqUleftv9-16" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_o6PqBTO9TZkf65g1Url-2" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div&gt;    &lt;span style=&quot;color: #d2a8ff;&quot;&gt;ingest_document&lt;/span&gt;(&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;job_descriptions&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: #c9d1d9;&quot;&gt;job_desc&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: #ffa657;&quot;&gt;doc_id&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;safe_id&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: #ffa657;&quot;&gt;metadata&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;{&lt;/div&gt;&lt;div&gt;            &lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;title&quot;&lt;/span&gt;: &lt;span style=&quot;color: #c9d1d9;&quot;&gt;title&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;            &lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;company&quot;&lt;/span&gt;: &lt;span style=&quot;color: #c9d1d9;&quot;&gt;company&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;            &lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;score&quot;&lt;/span&gt;: &lt;span style=&quot;color: #c9d1d9;&quot;&gt;score&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;            &lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;decision&quot;&lt;/span&gt;: &lt;span style=&quot;color: #c9d1d9;&quot;&gt;decision&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;        },&lt;/div&gt;&lt;div&gt;    )&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="270" width="420" x="475" y="1090" as="geometry" />
+        </mxCell>
+        <mxCell id="_o6PqBTO9TZkf65g1Url-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div&gt;    &lt;span style=&quot;color: #c9d1d9;&quot;&gt;collection&lt;/span&gt; &lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #d2a8ff;&quot;&gt;get_collection&lt;/span&gt;(&lt;span style=&quot;color: #ffa657;&quot;&gt;collection_name&lt;/span&gt;)&lt;/div&gt;&lt;div&gt;    &lt;span style=&quot;color: #c9d1d9;&quot;&gt;collection&lt;/span&gt;.&lt;span style=&quot;color: #d2a8ff;&quot;&gt;upsert&lt;/span&gt;(&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: #ffa657;&quot;&gt;documents&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;[&lt;span style=&quot;color: #ffa657;&quot;&gt;text&lt;/span&gt;],&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: #ffa657;&quot;&gt;ids&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;[&lt;span style=&quot;color: #ffa657;&quot;&gt;doc_id&lt;/span&gt;],&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: #ffa657;&quot;&gt;metadatas&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;[&lt;span style=&quot;color: #ffa657;&quot;&gt;metadata&lt;/span&gt; &lt;span style=&quot;color: #569cd6;&quot;&gt;or&lt;/span&gt; {}],&lt;/div&gt;&lt;div&gt;    )&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="170" width="410" x="1010" y="1140" as="geometry" />
+        </mxCell>
+        <mxCell id="_o6PqBTO9TZkf65g1Url-5" parent="1" style="whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;div&gt;    &lt;span style=&quot;color: #c9d1d9;&quot;&gt;score&lt;/span&gt; &lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #c9d1d9;&quot;&gt;details&lt;/span&gt;[&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;score&quot;&lt;/span&gt;]&lt;/div&gt;&lt;div&gt;    &lt;span style=&quot;color: #c9d1d9;&quot;&gt;decision&lt;/span&gt; &lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #d2a8ff;&quot;&gt;decide&lt;/span&gt;(&lt;span style=&quot;color: #c9d1d9;&quot;&gt;score&lt;/span&gt;)&lt;/div&gt;&lt;br&gt;&lt;div&gt;    &lt;span style=&quot;color: #d2a8ff;&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #ff7b72;&quot;&gt;f&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;  Score: &lt;/span&gt;&lt;span style=&quot;color: #ff7b72;&quot;&gt;{&lt;/span&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;score&lt;/span&gt;&lt;span style=&quot;color: #ff7b72;&quot;&gt;}&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;/100  →  Decision: &lt;/span&gt;&lt;span style=&quot;color: #ff7b72;&quot;&gt;{&lt;/span&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;decision&lt;/span&gt;.&lt;span style=&quot;color: #d2a8ff;&quot;&gt;upper&lt;/span&gt;()&lt;span style=&quot;color: #ff7b72;&quot;&gt;}&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div&gt;    &lt;span style=&quot;color: #c586c0;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #c9d1d9;&quot;&gt;details&lt;/span&gt;.&lt;span style=&quot;color: #d2a8ff;&quot;&gt;get&lt;/span&gt;(&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;gaps&quot;&lt;/span&gt;):&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: #d2a8ff;&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #ff7b72;&quot;&gt;f&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;  Gaps:  &lt;/span&gt;&lt;span style=&quot;color: #ff7b72;&quot;&gt;{&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&#39;; &#39;&lt;/span&gt;.&lt;span style=&quot;color: #d2a8ff;&quot;&gt;join&lt;/span&gt;(&lt;span style=&quot;color: #c9d1d9;&quot;&gt;details&lt;/span&gt;[&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&#39;gaps&#39;&lt;/span&gt;][:&lt;span style=&quot;color: #b5cea8;&quot;&gt;2&lt;/span&gt;])&lt;span style=&quot;color: #ff7b72;&quot;&gt;}&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;&lt;/span&gt;)&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="520" x="955" y="880" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="6_IDe3FcRqJzZLLow-e1" name="resume_tailor.py">
+    <mxGraphModel dx="1414" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="3000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="CXQzlKl3C1pUuwJI0YL9-1" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="resume_tailor.py" vertex="1">
+          <mxGeometry height="70" width="230" x="622.5" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CXQzlKl3C1pUuwJI0YL9-2" parent="CXQzlKl3C1pUuwJI0YL9-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="def main():" vertex="1">
+          <mxGeometry height="40" width="230" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="CXQzlKl3C1pUuwJI0YL9-3" edge="1" parent="1" source="CXQzlKl3C1pUuwJI0YL9-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="CXQzlKl3C1pUuwJI0YL9-4" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="892.5" y="-40" as="sourcePoint" />
+            <mxPoint x="1017.5" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CXQzlKl3C1pUuwJI0YL9-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); line-height: 18px;&quot;&gt;&lt;div&gt;    &lt;span style=&quot;color: #c586c0;&quot;&gt;for&lt;/span&gt; &lt;span style=&quot;color: #c9d1d9;&quot;&gt;job&lt;/span&gt; &lt;span style=&quot;color: #c586c0;&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #c9d1d9;&quot;&gt;apply_jobs&lt;/span&gt;:&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: #d2a8ff;&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #ff7b72;&quot;&gt;f&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #d7ba7d;&quot;&gt;\n&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;[Resume] Tailoring for: &lt;br/&gt;&lt;/span&gt;&lt;span style=&quot;color: #ff7b72;&quot;&gt;{&lt;/span&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;job&lt;/span&gt;[&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&#39;title&#39;&lt;/span&gt;]&lt;span style=&quot;color: #ff7b72;&quot;&gt;}&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt; @ &lt;/span&gt;&lt;span style=&quot;color: #ff7b72;&quot;&gt;{&lt;/span&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;job&lt;/span&gt;[&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&#39;company&#39;&lt;/span&gt;]&lt;span style=&quot;color: #ff7b72;&quot;&gt;}&lt;/span&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div&gt;        &lt;span style=&quot;color: #d2a8ff;&quot;&gt;tailor_resume&lt;/span&gt;(&lt;span style=&quot;color: #c9d1d9;&quot;&gt;job&lt;/span&gt;, &lt;span style=&quot;color: #c9d1d9;&quot;&gt;cv_text&lt;/span&gt;, &lt;span style=&quot;color: #ffa657;&quot;&gt;model&lt;/span&gt;&lt;span style=&quot;color: #d4d4d4;&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #c9d1d9;&quot;&gt;model&lt;/span&gt;)&lt;/div&gt;&lt;/div&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="470" x="580" y="220" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

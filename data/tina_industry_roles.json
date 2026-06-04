@@ -1,77 +1,83 @@
-[
+[[
   {
-    "area": "Content writing / editorial",
+    "area": "Content writing and editorial",
     "roles": ["Content Writer", "Editor", "Editorial Assistant", "Research Writer"],
     "fit": "Direct fit with English Literature, academic writing, publications, and strong text analysis"
   },
   {
-    "area": "Education / EdTech",
+    "area": "Education and EdTech",
     "roles": ["Curriculum Developer", "Academic Content Specialist", "Instructional Designer"],
     "fit": "Strong fit because she can convert complex topics into structured learning materials"
   },
   {
-    "area": "Publishing / educational publishing",
+    "area": "Publishing and educational publishing",
     "roles": ["Publishing Assistant", "Textbook Editor", "Assessment Content Writer"],
     "fit": "Strong English background and academic writing skills fit education content production"
   },
   {
     "area": "Corporate communications",
-    "roles": ["Communications Executive", "Internal Communications Writer", "Content Executive"],
+    "roles": ["Corporate Communications Executive", "Internal Communications Writer", "Content Executive"],
     "fit": "Strong writing and presentation skills can transfer into business communication"
   },
   {
-    "area": "Training / Learning & Development",
-    "roles": ["L&D Executive", "Training Content Developer", "Soft Skills Trainer"],
-    "fit": "Her teaching, presentation, and research methodology background fit adult learning roles"
-  },
-  {
-    "area": "AI ethics / technology society research",
-    "roles": ["AI Ethics Research Assistant", "Responsible AI Researcher", "Digital Policy Researcher"],
+    "area": "AI ethics research",
+    "roles": ["AI Ethics Research Assistant", "Responsible AI Researcher", "Digital Policy Researcher", "AI Ethics and Policy Researcher", "English Linguist", "NLP Content Strategist "],
     "fit": "Her research on technoculture, posthumanism, identity, and AI-human interaction is relevant"
   },
   {
-    "area": "Media / cultural research",
-    "roles": ["Media Researcher", "Cultural Insights Analyst", "Trend Researcher"],
+    "area": "Media and cultural research",
+    "roles": ["Media Researcher", "Cultural Insights Analyst", "Cultural Trend Researcher"],
     "fit": "Cyberpunk, popular culture, identity studies, and technoculture analysis fit media research"
   },
   {
-    "area": "UX / qualitative research support",
-    "roles": ["UX Research Assistant", "User Research Coordinator", "Qualitative Research Assistant"],
+    "area": "UX and qualitative research support",
+    "roles": ["UX Research Assistant", "User Research Coordinator", "Qualitative Research Assistant", "AI UI Researcher", "AI UX Researcher"],
     "fit": "Literature research, critical analysis, and human-technology themes can transfer to user research"
   },
+
   {
-    "area": "Knowledge management / documentation",
+    "area": "Digital content and digital media",
+    "roles": ["Digital Content Executive", "Content Strategist", "Social Media Content Writer"],
+    "fit": "Her digital humanities and techno-cultural interests can support digital storytelling and content planning"
+  }],
+
+
+
+
+
+
+
+
+[
+  {
+    "area": "Knowledge management and documentation",
     "roles": ["Documentation Specialist", "Knowledge Analyst", "Research Documentation Executive"],
     "fit": "Strong writing, organization, and research synthesis skills are useful for knowledge-heavy teams"
   },
   {
-    "area": "Digital content / digital media",
-    "roles": ["Digital Content Executive", "Content Strategist", "Social Media Content Writer"],
-    "fit": "Her digital humanities and techno-cultural interests can support digital storytelling and content planning"
-  },
-  {
-    "area": "Policy / think tank support",
-    "roles": ["Research Assistant", "Policy Research Executive", "Programme Research Assistant"],
+    "area": "Policy and think tank support",
+    "roles": ["Policy Research Assistant", "Policy Research Executive", "Programme Research Assistant"],
     "fit": "Strong fit for research-heavy roles involving education, technology, culture, or society"
   },
   {
-    "area": "Museum / arts / heritage sector",
-    "roles": ["Programme Executive", "Curatorial Assistant", "Research Assistant", "Education Officer"],
+    "area": "Museum arts and heritage",
+    "roles": ["Museum arts and heritage Programme Executive", "Museum arts and heritage Curatorial Assistant", "Museum arts and heritage Research Assistant", "Museum arts and heritage Education Officer"],
     "fit": "Humanities research, cultural analysis, and writing skills fit arts and heritage institutions"
   },
   {
-    "area": "Market research / insights",
-    "roles": ["Research Executive", "Insights Associate", "Qualitative Analyst"],
+    "area": "Market research and insights",
+    "roles": ["Market research Research Executive", "Market research Insights Associate", "Market research Qualitative Analyst"],
     "fit": "Her ability to interpret texts, themes, narratives, and human behaviour can support qualitative market research"
   },
   {
-    "area": "Corporate ESG / social impact content",
+    "area": "Corporate ESG and social impact content",
     "roles": ["ESG Content Writer", "Grant Writer", "Social Impact Research Assistant", "Sustainability Communications Executive"],
     "fit": "Strong writing and research skills can support reports, narratives, and stakeholder communication"
   },
   {
-    "area": "Grant / proposal writing",
+    "area": "Grant and proposal writing",
     "roles": ["Proposal Writer", "Grant Writer", "Research Development Executive"],
     "fit": "Academic writing, publication experience, and research framing are directly useful"
   }
+  ]
 ]

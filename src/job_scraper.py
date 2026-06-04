@@ -40,11 +40,11 @@ def _ensure_playwright_browsers() -> None:
 
 
 def clean_keyword(kw):
-    # Only allow keywords with letters, numbers, spaces, and hyphens, and max 3 words
+    # Only allow keywords with letters, numbers, spaces, and hyphens, and max 6 words
     kw = kw.strip()
-    if len(kw.split()) > 3:
+    if len(kw.split()) > 6:
         return None
-    if not re.match(r'^[\w\s\-]+$', kw):
+    if not re.match(r'^[\w\s\-\,]+$', kw):
         return None
     return kw.lower()
 
@@ -54,7 +54,7 @@ def load_keywords():
     # Load academic roles
     with open(DATA_DIR / "tina_academia_roles.json") as f:
         academia = json.load(f)
-        for area in academia:
+        for area in academia[0]:
             for k in [area["area"]] + area["roles"]:
                 cleaned = clean_keyword(k)
                 if cleaned:
@@ -64,7 +64,7 @@ def load_keywords():
     # Load industry roles
     with open(DATA_DIR / "tina_industry_roles.json") as f:
         industry = json.load(f)
-        for area in industry:
+        for area in industry[0]:
             for k in [area["area"]] + area["roles"]:
                 cleaned = clean_keyword(k)
                 if cleaned:
@@ -151,18 +151,22 @@ def scrape_jobstreet(keywords, max_pages=1, fetch_full_descriptions=True):
                     full_desc = _fetch_full_description(detail_page, job_url)
                     time.sleep(0.5)
 
+                current_time = time.strftime("%Y-%m-%d %H:%M:%S %Z%z", time.localtime())
+
                 jobs.append({
                     "title": title,
                     "company": company,
                     "url": job_url,
                     "description": full_desc or card_snippet,
                     "matched_keyword": keyword,
+                    "source": "jobstreet",
+                    "scraped_at": current_time,
                 })
             print(f"[INFO] Done with keyword: {keyword}. Total jobs collected so far: {len(jobs)}")
             time.sleep(1)  # Be polite to the server
         browser.close()
     print(f"[INFO] Scraping complete. Total jobs collected: {len(jobs)}")
-    return jobs
+    return jobs[:40]  # Limit to 40 jobs to avoid overload
 
 def _linkedin_fetch_description(page, job_url: str) -> str:
     """Visit a LinkedIn job detail page and return the full description text."""
@@ -288,6 +292,8 @@ def scrape_linkedin(
                     description = _linkedin_fetch_description(detail_page, job_url)
                     time.sleep(1)  # polite delay
 
+                current_time = time.strftime("%Y-%m-%d %H:%M:%S %Z%z", time.localtime())
+
                 jobs.append({
                     "title": title,
                     "company": company,
@@ -295,6 +301,7 @@ def scrape_linkedin(
                     "description": description or snippet,
                     "matched_keyword": keyword,
                     "source": "linkedin",
+                    "scraped_at": current_time,
                 })
 
             print(f"[LinkedIn] Done '{keyword}'. Total so far: {len(jobs)}")
@@ -339,6 +346,7 @@ def scrape_all(
             key = j.get("url", "").split("?")[0]
             if key not in seen:
                 seen.add(key)
+                j.setdefault("source", "linkedin")
                 all_jobs.append(j)
         print(f"[scrape_all] LinkedIn: {len(li_jobs)} jobs")
 

@@ -51,7 +51,7 @@ def tailor_resume(job: dict, cv_text: str = None, model: str = DEFAULT_MODEL) ->
         import json
         req_text = json.dumps(requirements, indent=2)
     else:
-        req_text = description[:2000]
+        req_text = description[:3000]
 
     prompt = f"""You are a professional CV writer helping an academic candidate apply for a job.
 
@@ -62,6 +62,7 @@ Candidate background:
 - International conference presentations
 - Research in Digital Humanities, Posthumanism, Cyberpunk Studies, Identity Studies
 - Academic skills: Research Methodology, Academic Writing, Critical Theory, Literary Analysis
+- Spouse of a Singapore Permanent Resident, eligible for Long-Term Visit Pass (LTVP) and dependent pass to work in Singapore
 
 Target role: {title} at {company}
 
@@ -75,8 +76,9 @@ Task: Rewrite the CV to be tailored for this specific role.
 - Keep all factual information accurate — do NOT invent experience or qualifications
 - Reorder and reframe sections to emphasise what is most relevant to this role
 - Adjust the Professional Summary to speak directly to this role's needs
-- Use the job's keywords naturally where they genuinely apply
-- Keep the same CV structure: Summary, Education, Research Interests, Publications, Conferences, Skills
+- Use the job's keywords naturally where they apply
+- Create a concise, compelling narrative that connects Tina's background to the job requirements
+- Use a structured format that is easy to read for recruiters and ATS systems
 - Output plain text only, no markdown, no JSON
 
 Write the complete tailored CV now:"""

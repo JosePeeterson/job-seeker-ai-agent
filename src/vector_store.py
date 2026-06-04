@@ -103,10 +103,14 @@ def ingest_preferred_roles() -> int:
     for fname in ["tina_academia_roles.json", "tina_industry_roles.json"]:
         with open(DATA_DIR / fname) as f:
             role_areas = json.load(f)
-        for area_obj in role_areas:
+        for area_obj in role_areas[0]:
             area = area_obj["area"]
             fit = area_obj.get("fit", "")
+            seen_roles: set = set()
             for role in [area] + area_obj.get("roles", []):
+                if role in seen_roles:
+                    continue
+                seen_roles.add(role)
                 text = f"Role: {role}\nArea: {area}\nFit: {fit}"
                 doc_id = f"role_{fname}_{area}_{role}"[:120].replace(" ", "_")
                 docs.append(text)

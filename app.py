@@ -3,10 +3,15 @@ AI Job Seeker Agent — Streamlit UI
 Run with:  streamlit run app.py
 """
 
+import hashlib
+import hmac
 import io
 import json
+import os
 import sqlite3
+import subprocess
 import sys
+import time
 from contextlib import redirect_stdout
 from datetime import date
 from pathlib import Path
@@ -23,6 +28,7 @@ from db_schema import init_db
 from cover_letter import generate_cover_letter
 from notify import build_html, send_digest
 from resume_tailor import tailor_resume, _slug
+from resume_to_pdf import convert_resume as _convert_resume_to_pdf
 
 DATA_DIR = ROOT / "data"
 RANKED_PATH = DATA_DIR / "ranked_jobs.json"
@@ -32,7 +38,24 @@ DB_PATH = DATA_DIR / "jobs.db"
 RESUMES_DIR = DATA_DIR / "resumes"
 COVER_LETTERS_DIR = DATA_DIR / "cover_letters"
 
-MODELS = ["gpt-4o-mini", "gpt-4o", "llama3.1:8b", "mistral:7b", "qwen3:8b"]
+MODELS = ["llama3.1:8b", "mistral:7b", "qwen3:8b","gpt-4o-mini", "gpt-4o"]
+OLLAMA_MODELS = {m for m in MODELS if not m.startswith("gpt-")}
+
+
+def _ensure_ollama_running() -> bool:
+    """Start `ollama serve` in the background if it isn't already responsive.
+    Returns True if Ollama was already running, False if we just launched it.
+    """
+    try:
+        result = subprocess.run(["ollama", "list"], capture_output=True, timeout=3)
+        if result.returncode == 0:
+            return True  # already up
+    except (subprocess.TimeoutExpired, FileNotFoundError, OSError):
+        pass
+    # Not running — launch it and redirect output to /tmp/ollama.log
+    with open("/tmp/ollama.log", "w") as _log:
+        subprocess.Popen(["ollama", "serve"], stdout=_log, stderr=_log)
+    return False
 
 # ── Page config ─────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -41,6 +64,47 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+# ── Password gate ───────────────────────────────────────────────────────────
+# Set APP_PASSWORD_HASH in your environment or .streamlit/secrets.toml:
+#   python3 -c "import hashlib; print(hashlib.sha256(b'yourpassword').hexdigest())"
+#   export APP_PASSWORD_HASH="<hash>"   # or add to .streamlit/secrets.toml
+# If APP_PASSWORD_HASH is not set, the gate is disabled (local dev convenience).
+
+def _get_expected_hash() -> str:
+    h = os.environ.get("APP_PASSWORD_HASH", "")
+    if not h:
+        try:
+            h = st.secrets.get("APP_PASSWORD_HASH", "")
+        except Exception:
+            pass
+    return h
+
+
+def _check_password() -> bool:
+    if st.session_state.get("authenticated"):
+        return True
+    expected = _get_expected_hash()
+    if not expected:
+        return True  # gate disabled — no hash configured
+    with st.form("login_form"):
+        st.title("🔒 Access required")
+        st.caption("Enter the app password to continue.")
+        pwd = st.text_input("Password", type="password")
+        submitted = st.form_submit_button("Enter")
+        if submitted:
+            entered = hashlib.sha256(pwd.encode()).hexdigest()
+            if hmac.compare_digest(entered, expected):
+                st.session_state["authenticated"] = True
+                st.rerun()
+            else:
+                st.error("Incorrect password.")
+    return False
+
+
+if not _check_password():
+    st.stop()
+
 
 # ── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -128,6 +192,19 @@ def _db_upsert_and_apply(job: dict, resume_path: str, cl_path: str):
     conn.close()
 
 
+def _tailor_and_convert(job: dict, cv_text: str, model: str) -> str:
+    """Tailor a resume and auto-convert the saved .txt to a PDF."""
+    tailored = tailor_resume(job, cv_text=cv_text, model=model)
+    try:
+        slug = _slug(job.get("title", ""), job.get("company", ""))
+        txt_path = RESUMES_DIR / f"{slug}.txt"
+        if txt_path.exists():
+            _convert_resume_to_pdf(txt_path)
+    except Exception:
+        pass  # PDF conversion is best-effort; never block the main flow
+    return tailored
+
+
 def _db_mark_skipped(job: dict):
     init_db(str(DB_PATH))
     conn = sqlite3.connect(str(DB_PATH))
@@ -170,6 +247,20 @@ with st.sidebar:
     st.divider()
 
     st.session_state.model = st.selectbox("LLM model", MODELS, index=MODELS.index(st.session_state.model))
+
+    # ── Auto-start Ollama when a local model is selected ─────────────────
+    if st.session_state.model in OLLAMA_MODELS:
+        _ollama_key = f"ollama_started_{st.session_state.model}"
+        if _ollama_key not in st.session_state:
+            with st.spinner("Starting Ollama…"):
+                _already_running = _ensure_ollama_running()
+                if not _already_running:
+                    time.sleep(3)  # give the server a moment to become responsive
+            st.session_state[_ollama_key] = True
+            if _already_running:
+                st.toast("Ollama already running ✓", icon="✅")
+            else:
+                st.toast("Ollama started ✓", icon="🦙")
 
     # ── Auto-ingest CV data if ChromaDB is empty (e.g. fresh Streamlit Cloud deploy) ──
     if "cv_ingested" not in st.session_state:
@@ -333,15 +424,32 @@ elif page == "🔍 Review Jobs":
                 with doc_col:
                     if resume_path and cl_path:
                         st.success("Tailored resume + cover letter ready")
-                        dl1, dl2 = st.columns(2)
-                        dl1.download_button(
-                            "📄 Download Resume",
-                            data=Path(resume_path).read_text(),
-                            file_name=Path(resume_path).name,
-                            mime="text/plain",
-                            key=f"dl_resume_{k}",
-                        )
-                        dl2.download_button(
+                        dl1, dl2, dl3 = st.columns(3)
+                        pdf_path = Path(resume_path).with_suffix(".pdf")
+                        if pdf_path.exists():
+                            dl1.download_button(
+                                "📄 Resume (PDF)",
+                                data=pdf_path.read_bytes(),
+                                file_name=pdf_path.name,
+                                mime="application/pdf",
+                                key=f"dl_resume_pdf_{k}",
+                            )
+                            dl2.download_button(
+                                "📄 Resume (txt)",
+                                data=Path(resume_path).read_text(),
+                                file_name=Path(resume_path).name,
+                                mime="text/plain",
+                                key=f"dl_resume_txt_{k}",
+                            )
+                        else:
+                            dl1.download_button(
+                                "📄 Download Resume",
+                                data=Path(resume_path).read_text(),
+                                file_name=Path(resume_path).name,
+                                mime="text/plain",
+                                key=f"dl_resume_{k}",
+                            )
+                        dl3.download_button(
                             "📧 Download Cover Letter",
                             data=Path(cl_path).read_text(),
                             file_name=Path(cl_path).name,
@@ -358,7 +466,7 @@ elif page == "🔍 Review Jobs":
                         if st.button("⚡ Generate Docs", key=f"gen_{k}"):
                             with st.spinner("Generating tailored resume and cover letter…"):
                                 try:
-                                    tailored = tailor_resume(job, cv_text=cv_text, model=st.session_state.model)
+                                    tailored = _tailor_and_convert(job, cv_text=cv_text, model=st.session_state.model)
                                     generate_cover_letter(job, tailored_resume=tailored, model=st.session_state.model)
                                     st.success("Documents generated!")
                                     st.rerun()
@@ -498,7 +606,7 @@ elif page == "⚙️ Run Pipeline":
                         status.write(f"Processing: {job['title']} @ {job['company']}")
                         r, c = _docs_exist(job)
                         if not r:
-                            tailor_resume(job, cv_text=cv_text, model=st.session_state.model)
+                            _tailor_and_convert(job, cv_text=cv_text, model=st.session_state.model)
                         if not c:
                             generate_cover_letter(job, model=st.session_state.model)
                     status.update(label="✅ Documents generated", state="complete")
@@ -556,9 +664,10 @@ elif page == "⚙️ Run Pipeline":
                         status.write(f"  {job['title']} @ {job['company']}")
                         r, c = _docs_exist(job)
                         if not r:
-                            tailor_resume(job, cv_text=cv_text, model=st.session_state.model)
+                            _tailor_and_convert(job, cv_text=cv_text, model=st.session_state.model)
                         if not c:
-                            generate_cover_letter(job, model=st.session_state.model)
+                            #generate_cover_letter(job, model=st.session_state.model)
+                            continue  # Skip cover letter generation in full pipeline for speed
                     status.write("✅ Documents ready")
 
                 status.update(label="🎉 Pipeline complete!", state="complete")

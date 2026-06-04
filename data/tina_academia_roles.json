@@ -1,52 +1,78 @@
+[[
+  {
+    "area": "English Academic research and teaching",
+    "roles": ["English Literature post doctoral fellow", "English Literature Research fellow", "English Literature lecturer"],
+    "fit": "Her stated specialization includes English Literature and technology-culture research"
+  },
+  {
+    "area": "English school teacher",
+    "roles": ["poetry school teacher", "English Literature teacher", "English Polytechnic lecturer"],
+    "fit": "Her stated specialization includes English Literature and technology-culture research"
+  },  
+  {
+    "area": "English Literature",
+    "roles": ["English Literature Research Assistant", "English Literature Research Associate", "English Literature Teaching Fellow", "English Literature Project Assistant"],
+    "fit": "Her stated specialization includes English Literature and technology-culture research"
+  },
+  {
+    "area": "English Academic writing",
+    "roles": ["English Academic Writing Lecturer", "English Communication Skills Lecturer", "English for Academic Purposes Instructor"],
+    "fit": "Strong writing, publication, and presentation background"
+  },
+
+  {
+    "area": "English Literary theory and critical theory",
+    "roles": ["English Literature Teaching Assistant", "English Literature Research Assistant"],
+    "fit": "Her CV lists critical theory, posthumanism, Haraway, Hayles, and techno-cultural analysis"
+  },
+
+  {
+    "area": "AI and society Linguistics",
+    "roles": ["AI Prompt Engineer", "NLP Content Strategist", "AI Ethicist", "Ontologist", "AI Linguist"],
+    "fit": "Her research connects AI, digital consciousness, virtual reality, embodiment, and ethics"
+  },
+
+  {
+    "area": "English language and literature support roles",
+    "roles": ["English language Teaching Assistant", "English language Academic Tutor", "English language Programme Executive"],
+    "fit": "Suitable entry route into Singapore universities, polytechnics, and private higher education providers"
+  }],
+
+
+
+
+
+
 [
   {
     "area": "English Literature teaching",
-    "roles": ["Lecturer", "Adjunct Lecturer", "Part-time Lecturer", "Tutor"],
+    "roles": ["English Lecturer", "Adjunct English Lecturer", "Part-time English Lecturer", "English Tutor"],
     "fit": "Direct match with her MA/PhD in English Literature and literary research profile"
   },
   {
-    "area": "Academic writing / communication",
-    "roles": ["Academic Writing Lecturer", "Communication Skills Lecturer", "English for Academic Purposes Instructor"],
-    "fit": "Strong writing, publication, and presentation background"
-  },
-  {
-    "area": "Liberal arts / humanities teaching",
+    "area": "Humanities teaching",
     "roles": ["Humanities Lecturer", "General Education Lecturer", "Critical Thinking Instructor"],
     "fit": "Her critical theory, identity studies, technoculture, and literature background fits interdisciplinary humanities modules"
   },
   {
     "area": "Digital Humanities",
-    "roles": ["Research Assistant", "Research Associate", "Teaching Fellow", "Project Assistant"],
+    "roles": ["Digital Humanities Research Assistant", "Digital Humanities Research Associate", "Digital Humanities Teaching Fellow", "Digital Humanities Project Assistant"],
     "fit": "Her stated specialization includes Digital Humanities and technology-culture research"
   },
   {
-    "area": "Media / cultural studies",
-    "roles": ["Lecturer", "Tutor", "Research Assistant in Media Studies or Cultural Studies"],
+    "area": "Media and cultural studies",
+    "roles": ["Lecturer in Media Studies", "Tutor in Media Studies", "Research Assistant in Media Studies","Lecturer in Cultural Studies", "Tutor in Cultural Studies", "Research Assistant in Cultural Studies"],
     "fit": "Cyberpunk, technoculture, identity, posthumanism, and popular media analysis align well"
   },
   {
-    "area": "Literary theory / critical theory",
-    "roles": ["Lecturer", "Teaching Assistant", "Research Assistant"],
-    "fit": "Her CV lists critical theory, posthumanism, Haraway, Hayles, and techno-cultural analysis"
-  },
-  {
-    "area": "Speculative fiction / science fiction studies",
-    "roles": ["Lecturer", "Tutor", "Research Assistant"],
+    "area": "Speculative fiction and science fiction studies",
+    "roles": ["Speculative fiction Lecturer", "Speculative fiction Tutor", "Speculative fiction Research Assistant"],
     "fit": "Her thesis on cyberpunk trilogies directly fits sci-fi/speculative fiction teaching or research"
-  },
-  {
-    "area": "AI, technology, and society",
-    "roles": ["Research Assistant", "Teaching Assistant", "Programme Assistant"],
-    "fit": "Her research connects AI, digital consciousness, virtual reality, embodiment, and ethics"
   },
   {
     "area": "Interdisciplinary humanities research",
     "roles": ["Research Assistant", "Research Associate", "Project Coordinator"],
     "fit": "Strong fit for projects linking literature, technology, philosophy, media, and ethics"
-  },
-  {
-    "area": "English language / literature support roles",
-    "roles": ["Teaching Assistant", "Academic Tutor", "Programme Executive"],
-    "fit": "Suitable entry route into Singapore universities, polytechnics, and private higher education providers"
   }
+]
 ]

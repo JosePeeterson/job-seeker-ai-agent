@@ -82,10 +82,10 @@ Return ONLY a valid JSON object with these exact keys:
 
 Job description:
 \"\"\"
-{job_description[:3000]}
+{job_description[:5000]}
 \"\"\"
-
 Return only the JSON object. No explanation."""
+    
     raw = _chat(prompt, model)
     try:
         return _parse_json(raw)
@@ -125,6 +125,7 @@ IMPORTANT CONTEXT about the candidate:
 - PhD-level research and publications count as teaching readiness ONLY for subjects within her domain
 - She is based in Singapore on a Dependent Pass (spouse of a Singapore Permanent Resident (PR)) and eligible to work
 - Do NOT penalise her for lacking formal years of employment if her PhD research fills that role
+- She can only speak, read, and write in English and Tamil but not other languages
 
 HARD DOMAIN RULES — apply these strictly before scoring:
 - Score 0-25 if the role requires teaching or expertise in a technical field completely outside her background: Programming/Computer Science (Python, C++, Java, algorithms), Electrical/Mechanical/Aerospace Engineering, Finance/Investment/Accounting, Clinical Psychology/Medicine/Healthcare — she has NO background in these
@@ -217,6 +218,9 @@ def rank_job(job: dict, model: str = DEFAULT_MODEL) -> dict:
         requirements = extract_requirements(job_desc, model)
     except Exception as exc:
         print(f"[ERROR] extract_requirements failed for '{title}': {exc}")
+        print(f"if connection error then run below command to start local LLM server:")
+        print(f"RUN 'ollama serve &>/tmp/ollama.log & sleep 3 && ollama list'\
+               to start the local LLM server if not already running.")
         return {
             **job,
             "score": 0,
@@ -254,7 +258,7 @@ def rank_job(job: dict, model: str = DEFAULT_MODEL) -> dict:
         print(f"  Gaps:  {'; '.join(details['gaps'][:2])}")
 
     # Step 5 — Store job description in ChromaDB for future reference
-    safe_id = f"jd_{job.get('url', title)}"[:120].replace(" ", "_").replace("/", "_")
+    safe_id = f"jd_{job.get('url', title)}"[:200].replace(" ", "_").replace("/", "_")
     ingest_document(
         "job_descriptions",
         job_desc,
@@ -302,15 +306,15 @@ def rank_all_jobs(jobs: list, model: str = DEFAULT_MODEL) -> list:
 def print_summary(ranked_jobs: list) -> None:
     """Print a human-readable table of ranked results."""
     print("\n" + "=" * 70)
-    print(f"{'#':>3}  {'Score':>5}  {'Decision':<8}  {'Title':<35}  Company")
+    print(f"{'#':>3}  {'Score':>5}  {'Decision':<8}  {'Title':<40}  Company")
     print("-" * 70)
     for i, job in enumerate(ranked_jobs, 1):
         decision = job.get("decision", "?")
         score = job.get("score", 0)
-        title = job.get("title", "")[:34]
-        company = job.get("company", "")[:20]
+        title = job.get("title", "")[:40]
+        company = job.get("company", "")[:40]
         flag = {"apply": "✓", "maybe": "~", "reject": "✗"}.get(decision, "?")
-        print(f"{i:>3}  {score:>5}  {flag} {decision:<6}  {title:<35}  {company}")
+        print(f"{i:>3}  {score:>5}  {flag} {decision:<6}  {title:<40}  {company}")
     print("=" * 70)
 
 
