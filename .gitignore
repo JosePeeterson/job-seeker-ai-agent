@@ -35,3 +35,6 @@ data/applications/
 
 # streamlit
 .streamlit/secrets.toml
+
+# github pat
+pat-git.txt
