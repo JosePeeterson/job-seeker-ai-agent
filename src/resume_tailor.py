@@ -1,9 +1,9 @@
 """
 Resume tailoring module.
 
-Takes a ranked job dict + Tina's full CV text and produces a tailored
+Takes a ranked job dict + the user's full CV text and produces a tailored
 resume (plain text) that highlights the most relevant experience and
-maps her background to the specific job requirements.
+maps their background to the specific job requirements.
 
 Usage:
     from resume_tailor import tailor_resume
@@ -22,7 +22,7 @@ from llm import chat as _llm_chat
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 RESUMES_DIR = DATA_DIR / "resumes"
-CV_PATH = DATA_DIR / "tina_cv.txt"
+CV_PATH = DATA_DIR / "user_cv" / "user_cv.txt"
 
 DEFAULT_MODEL = "llama3.1:8b"
 
@@ -53,33 +53,25 @@ def tailor_resume(job: dict, cv_text: str = None, model: str = DEFAULT_MODEL) ->
     else:
         req_text = description[:3000]
 
-    prompt = f"""You are a professional CV writer helping an academic candidate apply for a job.
-
-Candidate background:
-- PhD (submitted) in English Literature, specialising in Digital Humanities and Posthumanism
-- MA English Literature (First Class with Distinction)
-- Scopus-indexed publications on cyberpunk literature and technoculture
-- International conference presentations
-- Research in Digital Humanities, Posthumanism, Cyberpunk Studies, Identity Studies
-- Academic skills: Research Methodology, Academic Writing, Critical Theory, Literary Analysis
-- Spouse of a Singapore Permanent Resident, eligible for Long-Term Visit Pass (LTVP) and dependent pass to work in Singapore
+    prompt = f"""You are a professional CV writer helping a candidate apply for a job.
 
 Target role: {title} at {company}
 
 Job requirements:
 {req_text}
 
-Original CV:
+Candidate's original CV:
 {cv_text}
 
-Task: Rewrite the CV to be tailored for this specific role. 
+Task: Rewrite the CV to be tailored for this specific role.
 - Keep all factual information accurate — do NOT invent experience or qualifications
 - Reorder and reframe sections to emphasise what is most relevant to this role
 - Adjust the Professional Summary to speak directly to this role's needs
 - Use the job's keywords naturally where they apply
-- Create a concise, compelling narrative that connects Tina's background to the job requirements
+- Create a concise, compelling narrative that connects the candidate's background to the job requirements
 - Use a structured format that is easy to read for recruiters and ATS systems
 - Output plain text only, no markdown, no JSON
+- Do not add any "Note: ..."  commentary or explanations in the tailored resume.  
 
 Write the complete tailored CV now:"""
 
@@ -98,7 +90,7 @@ Write the complete tailored CV now:"""
 if __name__ == "__main__":
     import json
 
-    ranked_path = DATA_DIR / "ranked_jobs.json"
+    ranked_path = DATA_DIR / "ranked_jobs" / "ranked_jobs.json"
     if not ranked_path.exists():
         print("No ranked_jobs.json found. Run job_ranker.py first.")
         sys.exit(1)

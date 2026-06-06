@@ -2,7 +2,7 @@
 End-to-end workflow orchestrator.
 
 Steps:
-  1. Scrape JobStreet for Tina's keywords
+  1. Scrape job boards for the user's keywords
   2. Rank all scraped jobs (extract requirements → score fit → decide)
   3. For each "apply" decision: tailor resume + generate cover letter
   4. Save everything; print summary
@@ -28,9 +28,9 @@ from cover_letter import generate_cover_letter
 from notify import send_digest
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-SCRAPED_PATH = DATA_DIR / "scraped_jobs.json"
-RANKED_PATH = DATA_DIR / "ranked_jobs.json"
-CV_PATH = DATA_DIR / "tina_cv.txt"
+SCRAPED_PATH = DATA_DIR / "scraped_jobs" / "scraped_jobs.json"
+RANKED_PATH = DATA_DIR / "ranked_jobs" / "ranked_jobs.json"
+CV_PATH = DATA_DIR / "user_cv" / "user_cv.txt"
 
 
 def run(skip_scrape: bool = False, apply_only: bool = False, model: str = DEFAULT_MODEL, notify: bool = False, sources: list = None):
@@ -53,6 +53,7 @@ def run(skip_scrape: bool = False, apply_only: bool = False, model: str = DEFAUL
         # ── 2. Rank ────────────────────────────────────────────────────────────
         print(f"\n[Workflow] ── Step 2: Ranking {len(jobs)} jobs (model: {model}) ──")
         ranked = rank_all_jobs(jobs, model=model)
+        RANKED_PATH.parent.mkdir(parents=True, exist_ok=True)
         with open(RANKED_PATH, "w") as f:
             json.dump(ranked, f, indent=2)
         print(f"[Workflow] Rankings saved to {RANKED_PATH}")

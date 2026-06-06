@@ -1,0 +1,7 @@
+[server]
+headless = true
+enableXsrfProtection = true
+
+[browser]
+# Prevents Streamlit from trying to open a local browser tab when headless
+gatherUsageStats = false

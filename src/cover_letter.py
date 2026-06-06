@@ -21,7 +21,7 @@ from llm import chat as _llm_chat
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 COVER_LETTERS_DIR = DATA_DIR / "cover_letters"
-CV_PATH = DATA_DIR / "tina_cv.txt"
+CV_PATH = DATA_DIR / "user_cv" / "user_cv.txt"
 RESUMES_DIR = DATA_DIR / "resumes"
 
 DEFAULT_MODEL = "llama3.1:8b"
@@ -65,10 +65,7 @@ def generate_cover_letter(
     req_text = json.dumps(requirements, indent=2) if requirements else description[:1500]
     strengths_text = "\n".join(f"- {s}" for s in strengths) if strengths else "(see resume)"
 
-    prompt = f"""You are a professional cover letter writer helping an academic candidate apply for a job.
-
-Candidate: R G Arshad Tina Raghi
-Contact: tinaarshara@gmail.com | +65 97156051 | Singapore (Dependent Pass, eligible to work)
+    prompt = f"""You are a professional cover letter writer helping a candidate apply for a job.
 
 Target role: {title} at {company}
 
@@ -78,13 +75,13 @@ Job requirements:
 Key strengths identified for this role:
 {strengths_text}
 
-Candidate's tailored resume:
+Candidate's tailored resume (use the name and contact details from this):
 {tailored_resume[:3000]}
 
 Write a professional cover letter for this application. Guidelines:
 - Address it to "The Hiring Manager" at {company}
-- 3-4 paragraphs: opening (role + why interested), fit (map her background to requirements), value (what she brings), closing (call to action)
-- Tone: confident but not arrogant; academic but accessible
+- 3-4 paragraphs: opening (role + why interested), fit (map their background to requirements), value (what they bring), closing (call to action)
+- Tone: confident but not arrogant; professional but accessible
 - Do NOT mention or apologise for gaps — focus only on strengths and fit
 - Do NOT invent experience or qualifications not in the resume
 - Keep to one page (approx 300-350 words)
@@ -107,7 +104,7 @@ Write the cover letter now:"""
 if __name__ == "__main__":
     import json
 
-    ranked_path = DATA_DIR / "ranked_jobs.json"
+    ranked_path = DATA_DIR / "ranked_jobs" / "ranked_jobs.json"
     if not ranked_path.exists():
         print("No ranked_jobs.json found. Run job_ranker.py first.")
         sys.exit(1)

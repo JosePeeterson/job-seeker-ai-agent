@@ -34,4 +34,4 @@ data/applications/
 .DS_Store
 
 # streamlit
-.streamlit/secrets.toml.streamlit/secrets.toml
+.streamlit/secrets.toml

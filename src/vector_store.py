@@ -2,11 +2,11 @@
 ChromaDB vector store for the AI Job Seeker Agent.
 
 Collections:
-  cv_chunks         — Tina's CV content, chunked for semantic search
+  cv_chunks         — User's CV content, chunked for semantic search
   writing_samples   — Writing samples (essays, articles, etc.)
   resumes           — Previous tailored resumes
   job_descriptions  — Scraped job descriptions
-  preferred_roles   — Preferred role descriptions from Tina's profile JSONs
+  preferred_roles   — Preferred role descriptions from roles.json
 """
 
 import json
@@ -85,7 +85,7 @@ def get_collection(name: str) -> chromadb.Collection:
 # ---------------------------------------------------------------------------
 
 def ingest_cv(cv_text: str, chunk_size: int = 60, overlap: int = 15) -> int:
-    """Chunk and upsert Tina's CV into the cv_chunks collection."""
+    """Chunk and upsert the user's CV into the cv_chunks collection."""
     collection = get_collection("cv_chunks")
     chunks = _chunk_text(cv_text, chunk_size, overlap)
     collection.upsert(
@@ -96,8 +96,34 @@ def ingest_cv(cv_text: str, chunk_size: int = 60, overlap: int = 15) -> int:
     return len(chunks)
 
 
+def ingest_preferred_roles_generic(roles_path: Path) -> int:
+    """Ingest preferred roles from a generic roles.json (flat list of area objects)."""
+    collection = get_collection("preferred_roles")
+    docs, ids, metas = [], [], []
+    with open(roles_path, encoding="utf-8") as f:
+        role_areas = json.load(f)
+    for area_obj in role_areas:
+        area = area_obj["area"]
+        fit = area_obj.get("fit", "")
+        seen_roles: set = set()
+        for role in [area] + area_obj.get("roles", []):
+            if role in seen_roles:
+                continue
+            seen_roles.add(role)
+            text = f"Role: {role}\nArea: {area}\nFit: {fit}"
+            doc_id = f"role_roles.json_{area}_{role}"[:120].replace(" ", "_")
+            docs.append(text)
+            ids.append(doc_id)
+            metas.append({"area": area, "role": role, "source": "roles.json"})
+    collection.upsert(documents=docs, ids=ids, metadatas=metas)
+    print(f"[VectorStore] Ingested {len(docs)} preferred role entries from {roles_path}.")
+    return len(docs)
+
+
 def ingest_preferred_roles() -> int:
-    """Ingest preferred roles from tina_academia_roles.json and tina_industry_roles.json."""
+    """Ingest preferred roles from tina_academia_roles.json and tina_industry_roles.json.
+    Kept for backward compatibility — prefer ingest_preferred_roles_generic().
+    """
     collection = get_collection("preferred_roles")
     docs, ids, metas = [], [], []
     for fname in ["tina_academia_roles.json", "tina_industry_roles.json"]:

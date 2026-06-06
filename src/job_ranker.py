@@ -108,7 +108,7 @@ def score_fit(
     model: str = DEFAULT_MODEL,
 ) -> dict:
     """
-    Score Tina's fit (0-100) against extracted requirements.
+    Score the candidate's fit (0-100) against extracted requirements.
 
     Returns dict with keys:
       score, strengths, gaps, explanation
@@ -117,21 +117,7 @@ def score_fit(
     role_context = "\n---\n".join(preferred_role_chunks) if preferred_role_chunks else ""
     req_text = json.dumps(requirements, indent=2)
 
-    prompt = f"""You are a career counsellor evaluating whether an academic candidate fits a job.
-
-IMPORTANT CONTEXT about the candidate:
-- She has a PhD (submitted) and MA in English Literature — this counts as a teaching qualification for subjects she actually knows
-- Her domain expertise is STRICTLY: English Literature, Digital Humanities, Posthumanism, Cyberpunk/Speculative Fiction, Media Studies, Communications, Academic Writing, Critical Theory, Content Writing, Narrative/Textual Analysis
-- PhD-level research and publications count as teaching readiness ONLY for subjects within her domain
-- She is based in Singapore on a Dependent Pass (spouse of a Singapore Permanent Resident (PR)) and eligible to work
-- Do NOT penalise her for lacking formal years of employment if her PhD research fills that role
-- She can only speak, read, and write in English and Tamil but not other languages
-
-HARD DOMAIN RULES — apply these strictly before scoring:
-- Score 0-25 if the role requires teaching or expertise in a technical field completely outside her background: Programming/Computer Science (Python, C++, Java, algorithms), Electrical/Mechanical/Aerospace Engineering, Finance/Investment/Accounting, Clinical Psychology/Medicine/Healthcare — she has NO background in these
-- Score 25-45 if the role is primarily Business/Management/Economics with no media, communication, or humanities component
-- Score 45-70 for roles with a mix of business/management AND communication/media/digital elements where her research is partially transferable
-- Score 70-100 for roles squarely in her domain: English/Humanities/Literature, Media & Communications, Content Writing/Editorial, Digital Humanities, interdisciplinary cultural/social studies, general educator roles (no fixed subject), or any role where strong academic writing and research are the primary requirements
+    prompt = f"""You are a career counsellor evaluating whether a candidate fits a job.
 
 Job title: {job_title}
 
@@ -147,14 +133,14 @@ Candidate preferred role profile:
 Score the fit from 0 to 100 using these bands:
 - 70-100: Strong match — clearly qualified with direct or highly transferable background, apply immediately
 - 45-69: Partial match — meaningful transferable skills and background, worth applying with a tailored CV
-- 25-44: Weak match — noticeable gaps but some relevance, apply only if desperate
-- 0-24: Poor match — domain mismatch (e.g. engineering, finance, CS with no connection to humanities)
+- 25-44: Weak match — noticeable gaps but some relevance, apply only if interested
+- 0-24: Poor match — significant domain or qualification mismatch
 
 Return ONLY a valid JSON object with these exact keys:
 - "score": integer 0-100
 - "strengths": list of 3-5 specific matching points (be specific, cite CV evidence)
 - "gaps": list of specific missing requirements or genuine weaknesses
-- "explanation": 2-3 sentence human-readable summary for Tina
+- "explanation": 2-3 sentence human-readable summary of fit
 
 No explanation outside the JSON."""
     
@@ -323,7 +309,7 @@ if __name__ == "__main__":
     from pathlib import Path
 
     DATA_DIR = Path(__file__).parent.parent / "data"
-    jobs_path = DATA_DIR / "scraped_jobs.json"
+    jobs_path = DATA_DIR / "scraped_jobs" / "scraped_jobs.json"
 
     if not jobs_path.exists():
         print(f"[ERROR] {jobs_path} not found. Run job_scraper.py first.")
@@ -345,7 +331,8 @@ if __name__ == "__main__":
     ranked = rank_all_jobs(jobs, model=model)
     print_summary(ranked)
 
-    out_path = DATA_DIR / "ranked_jobs.json"
+    out_path = DATA_DIR / "ranked_jobs" / "ranked_jobs.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, "w") as f:
         json.dump(ranked, f, indent=2)
     print(f"\n[INFO] Results saved to {out_path}")

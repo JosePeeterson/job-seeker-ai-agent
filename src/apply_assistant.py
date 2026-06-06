@@ -1,12 +1,11 @@
 """
 Interactive application assistant.
 
-Walks Tina through each ranked job (apply first, then maybe), shows
+Walks through each ranked job (apply first, then maybe), shows
 the score / strengths / gaps, and asks whether to proceed.
 
 On confirmation:
   - Generates tailored resume + cover letter (if not already on disk)
-  - Records the application in data/jobs.db (SQLite)
 
 Usage:
     python3 src/apply_assistant.py                  # review all apply + maybe
@@ -16,21 +15,17 @@ Usage:
 
 import argparse
 import json
-import sqlite3
 import sys
-from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from db_schema import init_db
 from resume_tailor import tailor_resume, _slug
 from cover_letter import generate_cover_letter
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-RANKED_PATH = DATA_DIR / "ranked_jobs.json"
-CV_PATH = DATA_DIR / "tina_cv.txt"
-DB_PATH = DATA_DIR / "jobs.db"
+RANKED_PATH = DATA_DIR / "ranked_jobs" / "ranked_jobs.json"
+CV_PATH = DATA_DIR / "user_cv" / "user_cv.txt"
 RESUMES_DIR = DATA_DIR / "resumes"
 COVER_LETTERS_DIR = DATA_DIR / "cover_letters"
 
@@ -44,55 +39,6 @@ BOLD = "\033[1m"
 RESET = "\033[0m"
 CYAN = "\033[96m"
 DIM = "\033[2m"
-
-
-# ---------------------------------------------------------------------------
-# DB helpers
-# ---------------------------------------------------------------------------
-
-def _db_upsert_job(conn: sqlite3.Connection, job: dict, resume_path: str, cl_path: str) -> int:
-    """Insert or update a job record; return the job row id."""
-    cur = conn.cursor()
-    cur.execute("SELECT id FROM jobs WHERE url = ?", (job.get("url", ""),))
-    row = cur.fetchone()
-    if row:
-        cur.execute(
-            """UPDATE jobs SET score=?, status=?, tailored_resume_path=?, cover_letter_path=?
-               WHERE id=?""",
-            (job.get("score", 0), "pending", resume_path, cl_path, row[0]),
-        )
-        return row[0]
-    else:
-        cur.execute(
-            """INSERT INTO jobs (title, company, url, description, score, status,
-                                  tailored_resume_path, cover_letter_path, application_date)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-            (
-                job.get("title", ""),
-                job.get("company", ""),
-                job.get("url", ""),
-                job.get("description", "")[:2000],
-                job.get("score", 0),
-                "pending",
-                resume_path,
-                cl_path,
-                str(date.today()),
-            ),
-        )
-        return cur.lastrowid
-
-
-def _db_record_application(conn: sqlite3.Connection, job_id: int, notes: str = ""):
-    cur = conn.cursor()
-    cur.execute(
-        "INSERT INTO applications (job_id, applied_on, status, notes) VALUES (?, ?, ?, ?)",
-        (job_id, str(date.today()), "applied", notes),
-    )
-
-
-def _db_mark_skipped(conn: sqlite3.Connection, job_id: int):
-    cur = conn.cursor()
-    cur.execute("UPDATE jobs SET status=? WHERE id=?", ("skipped", job_id))
 
 
 # ---------------------------------------------------------------------------
@@ -162,7 +108,7 @@ def _prompt(question: str, options: str = "[y/n/s/?]") -> str:
 # Main review loop
 # ---------------------------------------------------------------------------
 
-def review(jobs: list, model: str, conn: sqlite3.Connection, cv_text: str):
+def review(jobs: list, model: str, cv_text: str):
     applied, skipped = [], []
 
     for idx, job in enumerate(jobs, 1):
@@ -213,12 +159,7 @@ def review(jobs: list, model: str, conn: sqlite3.Connection, cv_text: str):
                 except Exception as e:
                     print(f"  [WARN] Cover letter generation failed: {e}")
 
-            # Record in DB
-            job_id = _db_upsert_job(conn, job, resume_path, cl_path)
-            _db_record_application(conn, job_id)
-            conn.commit()
             applied.append(job)
-            print(f"  {GREEN}✓ Recorded in DB (job_id={job_id}){RESET}")
 
             # Show file locations
             if resume_path:
@@ -227,9 +168,6 @@ def review(jobs: list, model: str, conn: sqlite3.Connection, cv_text: str):
                 print(f"  {DIM}Cover letter: {cl_path}{RESET}")
 
         elif ans == "n":
-            job_id = _db_upsert_job(conn, job, resume_path, cl_path)
-            _db_mark_skipped(conn, job_id)
-            conn.commit()
             skipped.append(job)
             print(f"  {RED}✗ Skipped.{RESET}")
 
@@ -270,16 +208,9 @@ def main():
     print(f"  {len(apply_jobs)} apply  |  {len(maybe_jobs)} maybe  |  reviewing {len(queue)} total")
     print(f"{'='*68}{RESET}")
 
-    # Initialise SQLite
-    init_db(str(DB_PATH))
-    conn = sqlite3.connect(str(DB_PATH))
-
     cv_text = CV_PATH.read_text()
 
-    try:
-        applied, skipped = review(queue, model=args.model, conn=conn, cv_text=cv_text)
-    finally:
-        conn.close()
+    applied, skipped = review(queue, model=args.model, cv_text=cv_text)
 
     # Final summary
     print(f"\n{'='*68}")

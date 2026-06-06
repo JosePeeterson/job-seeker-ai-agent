@@ -10,7 +10,7 @@ Digest includes:
   - Reject count
 
 Configuration (environment variables or pass kwargs):
-  NOTIFY_EMAIL_TO      Recipient address (default: tinaarshara@gmail.com)
+  NOTIFY_EMAIL_TO      Recipient address (default: user@example.com)
   NOTIFY_EMAIL_FROM    Sender address
   NOTIFY_SMTP_HOST     SMTP host (default: smtp.gmail.com)
   NOTIFY_SMTP_PORT     SMTP port (default: 587)
@@ -38,10 +38,10 @@ from email.mime.text import MIMEText
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-RANKED_PATH = DATA_DIR / "ranked_jobs.json"
-DIGEST_PATH = DATA_DIR / "digest.html"
+RANKED_PATH = DATA_DIR / "ranked_jobs" / "ranked_jobs.json"
+DIGEST_PATH = DATA_DIR / "digest" / "digest.html"
 
-DEFAULT_TO = "tinaarshara@gmail.com"
+DEFAULT_TO = "user@example.com"
 
 
 # ---------------------------------------------------------------------------

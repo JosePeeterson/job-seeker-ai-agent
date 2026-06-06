@@ -16,6 +16,7 @@ opentelemetry-proto>=1.25.0
 # Web scraping (used by job_scraper.py)
 playwright>=1.44.0
 beautifulsoup4>=4.12.0
+curl_cffi>=0.7.0
 
 # Data / utils
 requests>=2.31.0
@@ -24,3 +25,6 @@ tqdm>=4.66.0
 
 # Resume PDF generation
 reportlab>=4.0.0
+
+# PDF resume upload / text extraction
+pypdf>=4.0.0
