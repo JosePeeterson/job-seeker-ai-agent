@@ -2,6 +2,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from typing import Callable, Optional
 from playwright.sync_api import sync_playwright
 from tqdm import tqdm
 import time
@@ -83,6 +84,17 @@ LINKEDIN_SG_GEO_ID = "102454443"
 EFC_BASE = "https://www.efinancialcareers.sg"
 
 
+def _emit_progress(progress_callback: Optional[Callable[..., None]], **payload) -> None:
+    """Safely emit scraper progress events when a callback is provided."""
+    if not progress_callback:
+        return
+    try:
+        progress_callback(**payload)
+    except Exception:
+        # Progress UI errors should never break scraping.
+        pass
+
+
 def _fetch_full_description(page, job_url: str) -> str:
     """Visit a job detail page and return the full job description text."""
     try:
@@ -95,7 +107,12 @@ def _fetch_full_description(page, job_url: str) -> str:
         return ""
 
 
-def scrape_jobstreet(keywords, max_pages=1, fetch_full_descriptions=True):
+def scrape_jobstreet(
+    keywords,
+    max_pages=1,
+    fetch_full_descriptions=True,
+    progress_callback: Optional[Callable[..., None]] = None,
+):
     _ensure_playwright_browsers()
     jobs = []
     seen_urls = set()
@@ -115,14 +132,33 @@ def scrape_jobstreet(keywords, max_pages=1, fetch_full_descriptions=True):
         list_page = context.new_page()
         detail_page = context.new_page() if fetch_full_descriptions else None
 
-        for keyword in tqdm(keywords, desc="Keywords", unit="kw"):
+        total_keywords = max(len(keywords), 1)
+        for idx, keyword in enumerate(tqdm(keywords, desc="Keywords", unit="kw")):
+            before_count = len(jobs)
+            keyword_new_jobs = []
             url = f"{BASE_URL}/{keyword.replace(' ', '-').lower()}-jobs"
             print(f"[INFO] Searching for jobs with keyword: {keyword}")
             list_page.goto(url)
             list_page.wait_for_timeout(5000)
-            job_cards = list_page.query_selector_all('article[data-testid="job-card"]')
+            job_cards = list_page.query_selector_all('article[data-testid="job-card"]')[:5]
             print(f"[INFO] Found {len(job_cards)} job cards for keyword '{keyword}'")
-            for card in job_cards:
+            _emit_progress(
+                progress_callback,
+                source="jobstreet",
+                keyword=keyword,
+                done=idx + 1,
+                total=total_keywords,
+                added=0,
+                source_total=len(jobs),
+                new_jobs=[],
+                processed_jobs=0,
+                total_jobs=len(job_cards),
+                phase="cards_init",
+            )
+
+            for card_idx, card in enumerate(job_cards, 1):
+                added_this_card = 0
+                new_jobs_this_card = []
                 title_el = card.query_selector("h3 a")
                 title = title_el.inner_text() if title_el else card.get_attribute("aria-label") or ""
                 company_el = card.query_selector('[data-automation="jobCompany"]')
@@ -134,32 +170,74 @@ def scrape_jobstreet(keywords, max_pages=1, fetch_full_descriptions=True):
                 # De-duplicate by URL (strip query string for comparison)
                 url_key = job_url.split("?")[0]
                 if url_key in seen_urls:
+                    _emit_progress(
+                        progress_callback,
+                        source="jobstreet",
+                        keyword=keyword,
+                        done=idx + 1,
+                        total=total_keywords,
+                        added=0,
+                        source_total=len(jobs),
+                        new_jobs=[],
+                        processed_jobs=card_idx,
+                        total_jobs=len(job_cards),
+                        phase="job_progress",
+                    )
                     continue
-                seen_urls.add(url_key)
 
                 card_snippet = card.inner_text()
                 # Filter: Only keep jobs where keyword is in title or snippet
-                if keyword.lower() not in title.lower() and keyword.lower() not in card_snippet.lower():
-                    continue
+                if keyword.lower() in title.lower() or keyword.lower() in card_snippet.lower():
+                    seen_urls.add(url_key)
 
-                # Fetch full description from detail page
-                full_desc = ""
-                if fetch_full_descriptions and job_url:
-                    full_desc = _fetch_full_description(detail_page, job_url)
-                    time.sleep(0.5)
+                    # Fetch full description from detail page
+                    full_desc = ""
+                    if fetch_full_descriptions and job_url:
+                        full_desc = _fetch_full_description(detail_page, job_url)
+                        time.sleep(0.5)
 
-                current_time = time.strftime("%Y-%m-%d %H:%M:%S %Z%z", time.localtime())
+                    current_time = time.strftime("%Y-%m-%d %H:%M:%S %Z%z", time.localtime())
 
-                jobs.append({
-                    "title": title,
-                    "company": company,
-                    "url": job_url,
-                    "description": full_desc or card_snippet,
-                    "matched_keyword": keyword,
-                    "source": "jobstreet",
-                    "scraped_at": current_time,
-                })
+                    jobs.append({
+                        "title": title,
+                        "company": company,
+                        "url": job_url,
+                        "description": full_desc or card_snippet,
+                        "matched_keyword": keyword,
+                        "source": "jobstreet",
+                        "scraped_at": current_time,
+                    })
+                    keyword_new_jobs.append(jobs[-1])
+                    added_this_card = 1
+                    new_jobs_this_card = [jobs[-1]]
+
+                _emit_progress(
+                    progress_callback,
+                    source="jobstreet",
+                    keyword=keyword,
+                    done=idx + 1,
+                    total=total_keywords,
+                    added=added_this_card,
+                    source_total=len(jobs),
+                    new_jobs=new_jobs_this_card,
+                    processed_jobs=card_idx,
+                    total_jobs=len(job_cards),
+                    phase="job_progress",
+                )
             print(f"[INFO] Done with keyword: {keyword}. Total jobs collected so far: {len(jobs)}")
+            _emit_progress(
+                progress_callback,
+                source="jobstreet",
+                keyword=keyword,
+                done=idx + 1,
+                total=total_keywords,
+                added=len(jobs) - before_count,
+                source_total=len(jobs),
+                new_jobs=keyword_new_jobs,
+                processed_jobs=len(job_cards),
+                total_jobs=len(job_cards),
+                phase="keyword_complete",
+            )
             time.sleep(1)  # Be polite to the server
         browser.close()
     print(f"[INFO] Scraping complete. Total jobs collected: {len(jobs)}")
@@ -190,6 +268,7 @@ def scrape_linkedin(
     location: str = "Singapore",
     fetch_full_descriptions: bool = True,
     days_posted: int = 30,
+    progress_callback: Optional[Callable[..., None]] = None,
 ) -> list:
     """
     Scrape LinkedIn Jobs public search pages (no login required).
@@ -231,7 +310,10 @@ def scrape_linkedin(
         list_page = context.new_page()
         detail_page = context.new_page() if fetch_full_descriptions else None
 
-        for keyword in tqdm(keywords, desc="LinkedIn keywords", unit="kw"):
+        total_keywords = max(len(keywords), 1)
+        for idx, keyword in enumerate(tqdm(keywords, desc="LinkedIn keywords", unit="kw")):
+            before_count = len(jobs)
+            keyword_new_jobs = []
             encoded_kw = keyword.replace(" ", "%20")
             search_url = (
                 f"{LINKEDIN_BASE}/jobs/search/"
@@ -248,60 +330,100 @@ def scrape_linkedin(
                 continue
 
             # Job cards on the public search page
-            cards = list_page.query_selector_all("ul.jobs-search__results-list li")
+            cards = list_page.query_selector_all("ul.jobs-search__results-list li")[:5]
             if not cards:
                 # Fallback selector used on some LinkedIn page variants
-                cards = list_page.query_selector_all(".base-card")
+                cards = list_page.query_selector_all(".base-card")[:5]
             print(f"[LinkedIn] Found {len(cards)} cards for '{keyword}'")
 
-            for card in cards:
+            _emit_progress(
+                progress_callback,
+                source="linkedin",
+                keyword=keyword,
+                done=idx + 1,
+                total=total_keywords,
+                added=0,
+                source_total=len(jobs),
+                new_jobs=[],
+                processed_jobs=0,
+                total_jobs=len(cards),
+                phase="cards_init",
+            )
+
+            for card_idx, card in enumerate(cards, 1):
+                added_this_card = 0
+                new_jobs_this_card = []
                 # Title
                 title_el = card.query_selector("h3.base-search-card__title")
                 title = title_el.inner_text().strip() if title_el else ""
-                if not title:
-                    continue
+                if title:
+                    # Company
+                    company_el = card.query_selector("h4.base-search-card__subtitle")
+                    company = company_el.inner_text().strip() if company_el else ""
 
-                # Company
-                company_el = card.query_selector("h4.base-search-card__subtitle")
-                company = company_el.inner_text().strip() if company_el else ""
+                    # URL
+                    link_el = card.query_selector("a.base-card__full-link")
+                    job_url = link_el.get_attribute("href") if link_el else ""
+                    if job_url:
+                        # Strip tracking params — keep only the canonical path
+                        job_url = job_url.split("?")[0]
 
-                # URL
-                link_el = card.query_selector("a.base-card__full-link")
-                job_url = link_el.get_attribute("href") if link_el else ""
-                if not job_url:
-                    continue
-                # Strip tracking params — keep only the canonical path
-                job_url = job_url.split("?")[0]
+                    if job_url and job_url not in seen_urls:
+                        # Relevance filter
+                        snippet = card.inner_text()
+                        kw_lower = keyword.lower()
+                        if kw_lower in title.lower() or kw_lower in snippet.lower():
+                            seen_urls.add(job_url)
 
-                if job_url in seen_urls:
-                    continue
-                seen_urls.add(job_url)
+                            # Full description
+                            description = ""
+                            if fetch_full_descriptions and detail_page:
+                                description = _linkedin_fetch_description(detail_page, job_url)
+                                time.sleep(1)  # polite delay
 
-                # Relevance filter
-                snippet = card.inner_text()
-                kw_lower = keyword.lower()
-                if kw_lower not in title.lower() and kw_lower not in snippet.lower():
-                    continue
+                            current_time = time.strftime("%Y-%m-%d %H:%M:%S %Z%z", time.localtime())
 
-                # Full description
-                description = ""
-                if fetch_full_descriptions and detail_page:
-                    description = _linkedin_fetch_description(detail_page, job_url)
-                    time.sleep(1)  # polite delay
+                            jobs.append({
+                                "title": title,
+                                "company": company,
+                                "url": job_url,
+                                "description": description or snippet,
+                                "matched_keyword": keyword,
+                                "source": "linkedin",
+                                "scraped_at": current_time,
+                            })
+                            keyword_new_jobs.append(jobs[-1])
+                            added_this_card = 1
+                            new_jobs_this_card = [jobs[-1]]
 
-                current_time = time.strftime("%Y-%m-%d %H:%M:%S %Z%z", time.localtime())
-
-                jobs.append({
-                    "title": title,
-                    "company": company,
-                    "url": job_url,
-                    "description": description or snippet,
-                    "matched_keyword": keyword,
-                    "source": "linkedin",
-                    "scraped_at": current_time,
-                })
+                _emit_progress(
+                    progress_callback,
+                    source="linkedin",
+                    keyword=keyword,
+                    done=idx + 1,
+                    total=total_keywords,
+                    added=added_this_card,
+                    source_total=len(jobs),
+                    new_jobs=new_jobs_this_card,
+                    processed_jobs=card_idx,
+                    total_jobs=len(cards),
+                    phase="job_progress",
+                )
 
             print(f"[LinkedIn] Done '{keyword}'. Total so far: {len(jobs)}")
+            _emit_progress(
+                progress_callback,
+                source="linkedin",
+                keyword=keyword,
+                done=idx + 1,
+                total=total_keywords,
+                added=len(jobs) - before_count,
+                source_total=len(jobs),
+                new_jobs=keyword_new_jobs,
+                processed_jobs=len(cards),
+                total_jobs=len(cards),
+                phase="keyword_complete",
+            )
             time.sleep(2)
 
         browser.close()
@@ -364,6 +486,7 @@ def scrape_efinancialcareers(
     keywords: list,
     location: str = "Singapore",
     fetch_full_descriptions: bool = True,
+    progress_callback: Optional[Callable[..., None]] = None,
 ) -> list:
     """
     Scrape eFinancialCareers Singapore using curl_cffi (Safari TLS impersonation)
@@ -386,51 +509,138 @@ def scrape_efinancialcareers(
 
     print(f"[eFC] Starting scrape for {len(keywords)} keywords in {location}…")
 
-    for keyword in tqdm(keywords, desc="eFC keywords", unit="kw"):
+    total_keywords = max(len(keywords), 1)
+    for idx, keyword in enumerate(tqdm(keywords, desc="eFC keywords", unit="kw")):
+        before_count = len(jobs)
+        keyword_new_jobs = []
         print(f"[eFC] Searching: {keyword}")
-        raw_jobs = _efc_fetch_jobs_for_keyword(keyword, location)
+        raw_jobs = _efc_fetch_jobs_for_keyword(keyword, location)[:5]
         print(f"[eFC] Found {len(raw_jobs)} jobs for '{keyword}'")
 
+        _emit_progress(
+            progress_callback,
+            source="efinancialcareers",
+            keyword=keyword,
+            done=idx + 1,
+            total=total_keywords,
+            added=0,
+            source_total=len(jobs),
+            new_jobs=[],
+            processed_jobs=0,
+            total_jobs=len(raw_jobs),
+            phase="cards_init",
+        )
+
         kw_lower = keyword.lower()
-        for job in raw_jobs:
+        for job_idx, job in enumerate(raw_jobs, 1):
+            added_this_job = 0
+            new_jobs_this_job = []
             title = job.get("title", "")
             if not title:
+                _emit_progress(
+                    progress_callback,
+                    source="efinancialcareers",
+                    keyword=keyword,
+                    done=idx + 1,
+                    total=total_keywords,
+                    added=0,
+                    source_total=len(jobs),
+                    new_jobs=[],
+                    processed_jobs=job_idx,
+                    total_jobs=len(raw_jobs),
+                    phase="job_progress",
+                )
                 continue
 
             company = job.get("companyName") or job.get("fullCompanyName") or ""
             detail_path = job.get("detailsPageUrl", "")
             job_url = (EFC_BASE + detail_path) if detail_path.startswith("/") else detail_path
             if not job_url:
+                _emit_progress(
+                    progress_callback,
+                    source="efinancialcareers",
+                    keyword=keyword,
+                    done=idx + 1,
+                    total=total_keywords,
+                    added=0,
+                    source_total=len(jobs),
+                    new_jobs=[],
+                    processed_jobs=job_idx,
+                    total_jobs=len(raw_jobs),
+                    phase="job_progress",
+                )
                 continue
             job_url = job_url.split("?")[0]
 
             if job_url in seen_urls:
+                _emit_progress(
+                    progress_callback,
+                    source="efinancialcareers",
+                    keyword=keyword,
+                    done=idx + 1,
+                    total=total_keywords,
+                    added=0,
+                    source_total=len(jobs),
+                    new_jobs=[],
+                    processed_jobs=job_idx,
+                    total_jobs=len(raw_jobs),
+                    phase="job_progress",
+                )
                 continue
-            seen_urls.add(job_url)
 
             # Relevance filter — skip if keyword not in title or summary
             summary = job.get("summary", "") or job.get("description", "")
-            if kw_lower not in title.lower() and kw_lower not in summary.lower():
-                continue
+            if kw_lower in title.lower() or kw_lower in summary.lower():
+                seen_urls.add(job_url)
 
-            # description field already contains the full HTML description
-            description = job.get("description") or job.get("summary") or ""
-            # Strip HTML tags for plain text
-            description = re.sub(r"<[^>]+>", " ", description).strip()
+                # description field already contains the full HTML description
+                description = job.get("description") or job.get("summary") or ""
+                # Strip HTML tags for plain text
+                description = re.sub(r"<[^>]+>", " ", description).strip()
 
-            current_time = time.strftime("%Y-%m-%d %H:%M:%S %Z%z", time.localtime())
+                current_time = time.strftime("%Y-%m-%d %H:%M:%S %Z%z", time.localtime())
 
-            jobs.append({
-                "title": title,
-                "company": company,
-                "url": job_url,
-                "description": description,
-                "matched_keyword": keyword,
-                "source": "efinancialcareers",
-                "scraped_at": current_time,
-            })
+                jobs.append({
+                    "title": title,
+                    "company": company,
+                    "url": job_url,
+                    "description": description,
+                    "matched_keyword": keyword,
+                    "source": "efinancialcareers",
+                    "scraped_at": current_time,
+                })
+                keyword_new_jobs.append(jobs[-1])
+                added_this_job = 1
+                new_jobs_this_job = [jobs[-1]]
+
+            _emit_progress(
+                progress_callback,
+                source="efinancialcareers",
+                keyword=keyword,
+                done=idx + 1,
+                total=total_keywords,
+                added=added_this_job,
+                source_total=len(jobs),
+                new_jobs=new_jobs_this_job,
+                processed_jobs=job_idx,
+                total_jobs=len(raw_jobs),
+                phase="job_progress",
+            )
 
         print(f"[eFC] Done '{keyword}'. Total so far: {len(jobs)}")
+        _emit_progress(
+            progress_callback,
+            source="efinancialcareers",
+            keyword=keyword,
+            done=idx + 1,
+            total=total_keywords,
+            added=len(jobs) - before_count,
+            source_total=len(jobs),
+            new_jobs=keyword_new_jobs,
+            processed_jobs=len(raw_jobs),
+            total_jobs=len(raw_jobs),
+            phase="keyword_complete",
+        )
         time.sleep(1)
 
     print(f"[eFC] Scrape complete. {len(jobs)} jobs collected.")

@@ -5,6 +5,7 @@ Run with:  streamlit run app.py
 
 import hashlib
 import hmac
+import importlib
 import io
 import json
 import os
@@ -39,7 +40,14 @@ CV_PATH = USER_CV_PATH  # populated via Setup Profile page
 RESUMES_DIR = DATA_DIR / "resumes"
 COVER_LETTERS_DIR = DATA_DIR / "cover_letters"
 
-MODELS = ["llama3.1:8b", "mistral:7b", "qwen3:8b","gpt-4o-mini", "gpt-4o"]
+DEFAULT_OLLAMA_MODEL = os.environ.get("DEFAULT_OLLAMA_MODEL", "llama3.1:8b")
+MODELS = list(dict.fromkeys([
+    DEFAULT_OLLAMA_MODEL,
+    "mistral:7b",
+    "qwen3:8b",
+    "gpt-4o-mini",
+    "gpt-4o",
+]))
 OLLAMA_MODELS = {m for m in MODELS if not m.startswith("gpt-")}
 
 
@@ -57,6 +65,24 @@ def _ensure_ollama_running() -> bool:
     with open("/tmp/ollama.log", "w") as _log:
         subprocess.Popen(["ollama", "serve"], stdout=_log, stderr=_log)
     return False
+
+
+def _ensure_ollama_model_available(model: str) -> None:
+    """Ensure the selected Ollama model is installed locally."""
+    listed = subprocess.run(["ollama", "list"], capture_output=True, text=True, timeout=10)
+    if listed.returncode != 0:
+        raise RuntimeError("Could not query installed Ollama models.")
+    installed = {
+        line.split()[0].strip()
+        for line in listed.stdout.splitlines()[1:]
+        if line.strip()
+    }
+    if model in installed:
+        return
+    pulled = subprocess.run(["ollama", "pull", model], capture_output=True, text=True)
+    if pulled.returncode != 0:
+        err = (pulled.stderr or pulled.stdout or "unknown error").strip()
+        raise RuntimeError(f"Failed to pull Ollama model '{model}': {err}")
 
 # ── Page config ─────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -156,8 +182,8 @@ def _tailor_and_convert(job: dict, cv_text: str, model: str) -> str:
         txt_path = RESUMES_DIR / f"{slug}.txt"
         if txt_path.exists():
             _convert_resume_to_pdf(txt_path)
-    except Exception:
-        pass  # PDF conversion is best-effort; never block the main flow
+    except Exception as exc:
+        print(f"[WARN] PDF conversion failed for {slug}: {exc}")
     return tailored
 
 
@@ -186,14 +212,14 @@ Preferred job titles/roles:
 {job_titles}
 
 Generate a JSON array of role-area objects. Each object must have:
-- "area": a short label for the job category (3-6 words)
-- "roles": a list of specific job titles to search for on job boards (1-5 words each, realistic postings)
+- "area": a short label for the job category (1-3 words)
+- "roles": a list of specific job titles to search for on job boards (1-3 words each, realistic postings)
 - "fit": one sentence explaining why this area matches the user's preferences
 
 Requirements:
 - Include ALL of the user's stated roles, grouped sensibly into areas
-- Add similar/adjacent roles the user did not mention (e.g. senior/junior variants, related titles)
-- Produce enough entries that the total distinct keywords (area + all roles) is at least 15
+- Add only one more similar/adjacent role the user did not mention (e.g. related titles)
+- Produce enough entries that the total distinct keywords (area + all roles) is at max 10
 - Keep titles short and realistic — exactly as they would appear on JobStreet or LinkedIn
 - Do NOT include special characters except hyphens
 
@@ -313,6 +339,8 @@ def _watch_session_and_cleanup(session_id: str) -> None:
 # ── Session state defaults ───────────────────────────────────────────────────
 if "model" not in st.session_state:
     st.session_state.model = MODELS[0]
+if st.session_state.model not in MODELS:
+    st.session_state.model = MODELS[0]
 if "pipeline_log" not in st.session_state:
     st.session_state.pipeline_log = ""
 if "job_overrides" not in st.session_state:
@@ -390,10 +418,16 @@ with st.sidebar:
     if st.session_state.model in OLLAMA_MODELS:
         _ollama_key = f"ollama_started_{st.session_state.model}"
         if _ollama_key not in st.session_state:
-            with st.spinner("Starting Ollama…"):
-                _already_running = _ensure_ollama_running()
-                if not _already_running:
-                    time.sleep(3)  # give the server a moment to become responsive
+            try:
+                with st.spinner("Starting Ollama…"):
+                    _already_running = _ensure_ollama_running()
+                    if not _already_running:
+                        time.sleep(3)  # give the server a moment to become responsive
+                with st.spinner(f"Checking local model ({st.session_state.model})…"):
+                    _ensure_ollama_model_available(st.session_state.model)
+            except Exception as exc:
+                st.warning(f"Could not auto-prepare local model '{st.session_state.model}': {exc}")
+                _already_running = True
             st.session_state[_ollama_key] = True
             if _already_running:
                 st.toast("Ollama already running ✓", icon="✅")
@@ -507,13 +541,13 @@ def _render_job_list(jobs: list, ns: str = ""):
                             mime="text/plain",
                             key=f"dl_resume_{k}",
                         )
-                    # dl3.download_button(
-                    #     "📧 Download Cover Letter",
-                    #     data=Path(cl_path).read_text(),
-                    #     file_name=Path(cl_path).name,
-                    #     mime="text/plain",
-                    #     key=f"dl_cl_{k}",
-                    # )
+                    dl3.download_button(
+                        "📧 Download Cover Letter",
+                        data=Path(cl_path).read_text(),
+                        file_name=Path(cl_path).name,
+                        mime="text/plain",
+                        key=f"dl_cl_{k}",
+                    )
                 else:
                     missing = []
                     if not resume_path:
@@ -522,14 +556,17 @@ def _render_job_list(jobs: list, ns: str = ""):
                         missing.append("cover letter")
                     st.warning(f"No {' or '.join(missing)} yet.")
                     if st.button("⚡ Create custom Resume", key=f"gen_{k}"):
-                        with st.spinner("Generating tailored resume..."):
-                            try:
-                                tailored = _tailor_and_convert(job, cv_text=cv_text, model=st.session_state.model)
-                                generate_cover_letter(job, tailored_resume=tailored, model=st.session_state.model)
-                                st.success("Documents generated!")
-                                st.rerun()
-                            except Exception as e:
-                                st.error(f"Error: {e}")
+                        try:
+                            gen_bar = st.progress(0, text="Starting document generation...")
+                            gen_bar.progress(0.1, text="Tailoring resume...")
+                            tailored = _tailor_and_convert(job, cv_text=cv_text, model=st.session_state.model)
+                            gen_bar.progress(0.7, text="Generating cover letter...")
+                            generate_cover_letter(job, tailored_resume=tailored, model=st.session_state.model)
+                            gen_bar.progress(1.0, text="✅ Documents generated")
+                            st.success("Documents generated!")
+                            st.rerun()
+                        except Exception as e:
+                            st.error(f"Error: {e}")
 
             # with action_col:
             #     if db_status == "applied":
@@ -780,13 +817,18 @@ elif page == "2. ⚙️ New Job Search":
         st.session_state.scrape_lock_started_at = time.time()
 
         try:
-            from job_scraper import (
-                load_keywords,
-                scrape_jobstreet,
-                scrape_linkedin,
-                scrape_efinancialcareers,
-            )
-            from job_ranker import rank_job
+            import job_scraper as _job_scraper
+            import job_ranker as _job_ranker
+
+            # Ensure we use latest scraper/ranker code even in long-lived Streamlit sessions.
+            _job_scraper = importlib.reload(_job_scraper)
+            _job_ranker = importlib.reload(_job_ranker)
+
+            load_keywords = _job_scraper.load_keywords
+            scrape_jobstreet = _job_scraper.scrape_jobstreet
+            scrape_linkedin = _job_scraper.scrape_linkedin
+            scrape_efinancialcareers = _job_scraper.scrape_efinancialcareers
+            rank_job = _job_ranker.rank_job
 
             keywords = load_keywords()
             _source_display = {
@@ -797,6 +839,8 @@ elif page == "2. ⚙️ New Job Search":
             sources_to_run = [s for s in ["jobstreet", "linkedin", "efinancialcareers"]
                               if s in selected_sources]
             n_sources = len(sources_to_run)
+            keywords_count = max(len(keywords), 1)
+            total_scrape_units = max(n_sources * keywords_count, 1)
 
             # ── Phase 1: Scrape ──────────────────────────────────────────
             st.markdown(f"**🕷️ Scraping {src_label}…**")
@@ -830,22 +874,81 @@ elif page == "2. ⚙️ New Job Search":
 
             _render_scraped_jobs_preview(all_jobs)
 
-            _scraper_fn = {
-                "jobstreet": lambda kw: scrape_jobstreet(kw, fetch_full_descriptions=True),
-                "linkedin": lambda kw: scrape_linkedin(kw, fetch_full_descriptions=True),
-                "efinancialcareers": lambda kw: scrape_efinancialcareers(kw, fetch_full_descriptions=True),
+            _scraper_raw_fn = {
+                "jobstreet": scrape_jobstreet,
+                "linkedin": scrape_linkedin,
+                "efinancialcareers": scrape_efinancialcareers,
             }
+
+            def _invoke_scraper(source_name: str, kw: list, cb):
+                fn = _scraper_raw_fn[source_name]
+                try:
+                    return fn(kw, fetch_full_descriptions=True, progress_callback=cb)
+                except TypeError as exc:
+                    # Backward compatibility: older runtime function without progress callback.
+                    if "progress_callback" in str(exc):
+                        return fn(kw, fetch_full_descriptions=True)
+                    raise
 
             for i, source in enumerate(sources_to_run):
                 label = _source_display[source]
                 scrape_bar.progress(i / n_sources, text=f"Scraping {label}… ({i + 1}/{n_sources})")
+                source_base = i * keywords_count
+
+                def _on_source_progress(**evt):
+                    done = int(evt.get("done", 0))
+                    total = int(evt.get("total", keywords_count)) or keywords_count
+                    keyword = str(evt.get("keyword", ""))
+                    added = int(evt.get("added", 0))
+                    source_total = int(evt.get("source_total", 0))
+                    processed_jobs = int(evt.get("processed_jobs", 0) or 0)
+                    total_jobs = int(evt.get("total_jobs", 0) or 0)
+                    phase = str(evt.get("phase", ""))
+
+                    for j in evt.get("new_jobs", []) or []:
+                        key = j.get("url", "").split("?")[0]
+                        if key and key not in seen_urls:
+                            seen_urls.add(key)
+                            all_jobs.append(j)
+
+                    if total_jobs > 0 and processed_jobs >= 0:
+                        # Smooth progress within the current keyword: (done-1) + processed/total_jobs.
+                        keyword_units = min(max(done - 1, 0), max(total - 1, 0))
+                        keyword_units += min(processed_jobs, total_jobs) / max(total_jobs, 1)
+                        global_done = source_base + keyword_units
+                    else:
+                        global_done = source_base + min(done, total)
+
+                    frac = min(max(global_done / total_scrape_units, 0.0), 1.0)
+                    suffix = f"({done}/{total})"
+                    keyword_txt = f" — {keyword}" if keyword else ""
+
+                    if total_jobs > 0:
+                        jobs_txt = f" · jobs {processed_jobs}/{total_jobs}"
+                    elif phase == "cards_init":
+                        jobs_txt = " · jobs 0/0"
+                    else:
+                        jobs_txt = ""
+
+                    scrape_bar.progress(
+                        frac,
+                        text=(
+                            f"Scraping {label} {suffix}{keyword_txt} · "
+                            f"+{added} this step{jobs_txt} · {source_total} from {label} · "
+                            f"{len(all_jobs)} unique total"
+                        ),
+                    )
+                    _render_scraped_jobs_preview(all_jobs)
+
                 sys.stdout = io.StringIO()
                 sys.stderr = io.StringIO()
                 try:
-                    source_jobs = _scraper_fn[source](keywords)
+                    source_jobs = _invoke_scraper(source, keywords, _on_source_progress)
                 finally:
                     sys.stdout = sys.__stdout__
                     sys.stderr = sys.__stderr__
+
+                # Safety net in case a scraper returns jobs without emitting progress callbacks.
                 new = 0
                 for j in source_jobs:
                     key = j.get("url", "").split("?")[0]

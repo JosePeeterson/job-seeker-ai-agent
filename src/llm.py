@@ -21,7 +21,7 @@ from typing import Optional
 # Public default models
 # --------------------------------------------------------------------------
 DEFAULT_OPENAI_MODEL = "gpt-4o-mini"
-DEFAULT_OLLAMA_MODEL = "llama3.1:8b"
+DEFAULT_OLLAMA_MODEL = os.environ.get("DEFAULT_OLLAMA_MODEL", "llama3.1:8b")
 
 
 def _is_openai_model(model: str) -> bool:
@@ -78,7 +78,13 @@ def _chat_openai(prompt: str, model: str, temperature: float, api_key: str) -> s
 
 
 def _chat_ollama(prompt: str, model: str, temperature: float) -> str:
-    import ollama  # lazy import — not installed on Streamlit Cloud
+    try:
+        import ollama  # lazy import — not installed on Streamlit Cloud
+    except ModuleNotFoundError as exc:
+        raise RuntimeError(
+            "Ollama Python package is not installed. Install dependencies with "
+            "`pip install -r requirements.txt` or install `ollama`."
+        ) from exc
     response = ollama.chat(
         model=model,
         messages=[{"role": "user", "content": prompt}],

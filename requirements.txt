@@ -3,6 +3,7 @@ streamlit>=1.45.0
 
 # LLM backends
 openai>=1.30.0
+ollama>=0.3.0
 
 # Vector store
 chromadb>=0.5.0

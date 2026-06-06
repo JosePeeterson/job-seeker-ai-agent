@@ -64,14 +64,20 @@ Candidate's original CV:
 {cv_text}
 
 Task: Rewrite the CV to be tailored for this specific role.
-- Keep all factual information accurate — do NOT invent experience or qualifications
-- Reorder and reframe sections to emphasise what is most relevant to this role
-- Adjust the Professional Summary to speak directly to this role's needs
+- Keep all factual information accurate — do NOT invent personal details,experience or qualifications
+- The first few lines in the original CV contains personal details like name and contact info. Keep these in the tailored CV but do not add any heading like "Professional Summary" or "Personal Details" to them.
+- The very top should have personal details (name, contact info) and not a heading like "Professional Summary"
+- Do not include any Professional Summary that is customized for this role
+- Must create relevant sections such as education, experience, skills, projects etc. in the tailored CV.
+- seperate the sections with horizontal lines made of dashes (e.g. "──────") to improve readability, but do not add any section heading or title for the personal details at the top.
+- Reframe sections to emphasise what is most relevant to this role
 - Use the job's keywords naturally where they apply
 - Create a concise, compelling narrative that connects the candidate's background to the job requirements
 - Use a structured format that is easy to read for recruiters and ATS systems
 - Output plain text only, no markdown, no JSON
-- Do not add any "Note: ..."  commentary or explanations in the tailored resume.  
+- Try to cover 2 pages if possible, but do not add fluff just to increase length. 
+- DO not go beyond 2 pages and not less than 1 page. 
+- Do not add any note, commentary or explanations in the tailored resume.  
 
 Write the complete tailored CV now:"""
 

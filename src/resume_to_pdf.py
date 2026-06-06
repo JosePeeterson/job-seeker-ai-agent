@@ -313,8 +313,30 @@ def convert_resume(txt_path: Path) -> Path:
     text = txt_path.read_text(encoding="utf-8")
     name, contact_lines, sections = parse_resume(text)
 
+    # Fallback for plain-text resumes without markdown-style headers.
     if not name:
-        raise ValueError(f"Could not detect candidate name in {txt_path}")
+        lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+        if not lines:
+            raise ValueError(f"Resume file is empty: {txt_path}")
+
+        name = lines[0]
+
+        body_lines = lines[1:]
+        if body_lines and ("@" in body_lines[0] or "|" in body_lines[0]):
+            contact_lines = [p.strip() for p in body_lines[0].split("|") if p.strip()]
+            body_lines = body_lines[1:]
+        else:
+            contact_lines = contact_lines or []
+
+        fallback = ResumeSection("Experience")
+        for ln in body_lines:
+            if is_subbullet(ln):
+                fallback.items.append(("subbullet", subbullet_text(ln)))
+            elif is_bullet(ln):
+                fallback.items.append(("bullet", bullet_text(ln)))
+            else:
+                fallback.items.append(("body", ln))
+        sections = [fallback] if fallback.items else []
 
     out_path = txt_path.with_suffix(".pdf")
     build_pdf(name, contact_lines, sections, out_path)

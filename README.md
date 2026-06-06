@@ -220,6 +220,26 @@ python3 src/workflow.py --apply-only       # only generate docs for existing app
 python3 src/workflow.py --model mistral:7b # use a different Ollama model
 ```
 
+## ChromaDB Housekeeping
+
+Run a dry-run (no deletion):
+
+```bash
+./scripts/chroma_housekeeping.sh
+```
+
+Run cleanup (delete entries older than 30 days by mtime):
+
+```bash
+./scripts/chroma_housekeeping.sh --apply --days 30
+```
+
+This repository can also run monthly cleanup via cron:
+
+```cron
+17 3 1 * * /home/jose-peeterson/job-seeker-ai-agent/scripts/chroma_housekeeping.sh --apply --days 30 >> /home/jose-peeterson/job-seeker-ai-agent/logs/chroma_housekeeping.log 2>&1
+```
+
 ---
 
 ## Project Structure

@@ -10,7 +10,7 @@ On confirmation:
 Usage:
     python3 src/apply_assistant.py                  # review all apply + maybe
     python3 src/apply_assistant.py --apply-only     # skip maybe candidates
-    python3 src/apply_assistant.py --model mistral:7b
+    python3 src/apply_assistant.py --model llama3.1:8b
 """
 
 import argparse
